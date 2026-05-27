@@ -1,13 +1,9 @@
-/* EARTHY GREEN + MINT GREEN COLOR PALETTE */
+/* style.css */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
 }
 
 body {
@@ -55,38 +51,47 @@ body {
   list-style: none;
 }
 
-.nav-links a {
-  text-decoration: none;
+/* TAB BUTTONS */
+
+.tab-btn {
+  background: none;
+  border: none;
+
+  font-family: inherit;
+  font-size: 1rem;
+
+  cursor: pointer;
 
   color: #506756;
 
   transition: 0.3s;
 }
 
-.nav-links a:hover {
+.tab-btn:hover {
+  color: #6f9277;
+}
+
+.tab-btn.active {
   border-bottom: 2px solid #6f9277;
 
   padding-bottom: 5px;
+}
+
+/* TAB SYSTEM */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
 }
 
 /* MAIN */
 
 .container {
   width: 92%;
-  margin: 30px auto;
-}
-
-/* SECTION SPACING */
-
-#home,
-#about,
-#gallery,
-#study,
-#favorites,
-#playlist,
-#contact {
-  scroll-margin-top: 120px;
-  margin-bottom: 120px;
+  margin: 40px auto;
 }
 
 /* FEATURED ARTICLE */
@@ -108,8 +113,6 @@ body {
   border-radius: 28px;
 
   padding: 40px;
-
-  box-shadow: 0 4px 14px rgba(80, 110, 90, 0.05);
 }
 
 .featured-text h1 {
@@ -124,14 +127,12 @@ body {
   letter-spacing: 2px;
 
   color: #7d9784;
-
-  opacity: 0.9;
 }
 
 .article-description {
   line-height: 1.7;
 
-  color: #5d7263;
+  margin-bottom: 25px;
 }
 
 .featured-image {
@@ -141,20 +142,15 @@ body {
     #cde7d3
   );
 
-  border: 1px solid #c8dccd;
-
   border-radius: 28px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-
-  color: #6d8573;
 }
 
 /* BUTTONS */
 
-.read-more-btn,
 button {
   border: none;
 
@@ -173,8 +169,7 @@ button {
   transition: 0.3s;
 }
 
-button:hover,
-.read-more-btn:hover {
+button:hover {
   background: #c8dfce;
 
   transform: translateY(-2px);
@@ -199,22 +194,6 @@ button:hover,
   border-radius: 22px;
 
   padding: 25px;
-
-  transition: 0.3s;
-}
-
-.news-card:hover {
-  transform: translateY(-4px);
-}
-
-.news-card h3 {
-  margin: 10px 0;
-
-  color: #496151;
-}
-
-.news-category {
-  color: #7d9784;
 }
 
 /* LIVE UPDATES */
@@ -227,28 +206,6 @@ button:hover,
   border-radius: 24px;
 
   padding: 30px;
-}
-
-.live-updates h2 {
-  margin-bottom: 20px;
-
-  color: #4b6551;
-}
-
-.update {
-  display: flex;
-
-  gap: 20px;
-
-  padding: 18px 0;
-
-  border-bottom: 1px solid #dde9df;
-}
-
-.update span {
-  font-weight: 700;
-
-  color: #5e7965;
 }
 
 /* PLACEHOLDER */
@@ -271,8 +228,6 @@ button:hover,
 
 .study-header h1 {
   font-size: 3rem;
-
-  color: #496151;
 }
 
 /* DASHBOARD */
@@ -292,8 +247,6 @@ button:hover,
   padding: 24px;
 
   border: 1px solid #d5e4d7;
-
-  box-shadow: 0 4px 12px rgba(75, 101, 81, 0.05);
 }
 
 /* TIMER */
@@ -322,8 +275,6 @@ button:hover,
 #timer {
   font-size: 2.5rem;
   font-weight: 700;
-
-  color: #4b6551;
 }
 
 /* TODO */
@@ -344,8 +295,6 @@ button:hover,
   border-radius: 12px;
 
   border: 1px solid #cfe0d1;
-
-  background: #f8fdf9;
 }
 
 #taskList {
@@ -383,11 +332,7 @@ button:hover,
 
   border-radius: 12px;
 
-  background: linear-gradient(
-    135deg,
-    #bdd8c2,
-    #d7ece0
-  );
+  background: #bdd8c2;
 }
 
 /* QUOTE */
@@ -430,8 +375,6 @@ button:hover,
   padding: 20px;
 
   background: #f5fbf6;
-
-  color: #4e6353;
 }
 
 /* PENGUIN */
@@ -449,17 +392,9 @@ button:hover,
 .speech-bubble {
   background: #dff1e3;
 
-  color: #4f6554;
-
   padding: 15px 18px;
 
   border-radius: 18px;
-
-  animation: float 3s infinite ease-in-out;
-}
-
-.penguin {
-  animation: bounce 2s infinite;
 }
 
 .penguin-body {
@@ -481,7 +416,7 @@ button:hover,
   width: 90px;
   height: 120px;
 
-  background: #f7fff8;
+  background: white;
 
   border-radius: 50%;
 
@@ -493,7 +428,7 @@ button:hover,
   width: 10px;
   height: 10px;
 
-  background: #222;
+  background: black;
 
   border-radius: 50%;
 
@@ -528,7 +463,7 @@ button:hover,
   width: 14px;
   height: 14px;
 
-  background: #f6c7cf;
+  background: pink;
 
   opacity: 0.5;
 
@@ -545,32 +480,6 @@ button:hover,
 
 .right-blush {
   right: 25px;
-}
-
-/* ANIMATIONS */
-
-@keyframes bounce {
-
-  0%,100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-}
-
-@keyframes float {
-
-  0%,100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-5px);
-  }
-
 }
 
 /* RESPONSIVE */

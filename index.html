@@ -1,3 +1,5 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
 
   <title>Her World ✨</title>
 
-  <!-- FONT -->
+  <!-- GOOGLE FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -31,27 +33,65 @@
     </div>
 
     <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About Her</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#study">Study Corner</a></li>
-      <li><a href="#favorites">Favorites</a></li>
-      <li><a href="#playlist">Playlist</a></li>
-      <li><a href="#contact">Contact</a></li>
+
+      <li>
+        <button class="tab-btn active" data-tab="home">
+          Home
+        </button>
+      </li>
+
+      <li>
+        <button class="tab-btn" data-tab="about">
+          About Her
+        </button>
+      </li>
+
+      <li>
+        <button class="tab-btn" data-tab="gallery">
+          Gallery
+        </button>
+      </li>
+
+      <li>
+        <button class="tab-btn" data-tab="study">
+          Study Corner
+        </button>
+      </li>
+
+      <li>
+        <button class="tab-btn" data-tab="favorites">
+          Favorites
+        </button>
+      </li>
+
+      <li>
+        <button class="tab-btn" data-tab="playlist">
+          Playlist
+        </button>
+      </li>
+
+      <li>
+        <button class="tab-btn" data-tab="contact">
+          Contact
+        </button>
+      </li>
+
     </ul>
 
   </nav>
+
 
 
   <!-- MAIN CONTAINER -->
   <main class="container">
 
 
-    <!-- ========================= -->
-    <!-- HOME / NEWSLETTER SECTION -->
-    <!-- ========================= -->
 
-    <section id="home">
+    <!-- ====================== -->
+    <!-- HOME PAGE -->
+    <!-- ====================== -->
+
+    <section id="home" class="tab-content active">
 
       <!-- FEATURED ARTICLE -->
       <section class="featured-article">
@@ -183,54 +223,73 @@
 
 
 
-    <!-- ================= -->
-    <!-- ABOUT HER SECTION -->
-    <!-- ================= -->
-
-    <section id="about" class="placeholder-section">
-
-      <h1>About Her ✨</h1>
-
-      <p>
-        Add photos, favorite memories,
-        personality descriptions, fun facts,
-        and anything special here.
-      </p>
-
-    </section>
 
 
+    <!-- ====================== -->
+    <!-- ABOUT PAGE -->
+    <!-- ====================== -->
 
-    <!-- ================= -->
-    <!-- GALLERY SECTION -->
-    <!-- ================= -->
+    <section id="about" class="tab-content">
 
-    <section id="gallery" class="placeholder-section">
+      <div class="placeholder-section">
 
-      <h1>Gallery 📸</h1>
+        <h1>About Her ✨</h1>
 
-      <p>
-        Add cute photo collages here.
-      </p>
+        <p>
+          Add photos, fun facts,
+          favorite memories, and personality details here.
+        </p>
+
+      </div>
 
     </section>
 
 
 
-    <!-- ================= -->
+
+
+    <!-- ====================== -->
+    <!-- GALLERY PAGE -->
+    <!-- ====================== -->
+
+    <section id="gallery" class="tab-content">
+
+      <div class="placeholder-section">
+
+        <h1>Gallery 📸</h1>
+
+        <p>
+          Add photo collages and cute memories here.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+
+
+    <!-- ====================== -->
     <!-- STUDY CORNER -->
-    <!-- ================= -->
+    <!-- ====================== -->
 
-    <section id="study" class="study-corner">
+    <section id="study" class="tab-content">
 
       <div class="study-header">
+
         <h1>study corner ✨</h1>
-        <p>focus • plan • grow</p>
+
+        <p>
+          focus • plan • grow
+        </p>
+
       </div>
 
 
       <!-- DASHBOARD -->
       <section class="dashboard-grid">
+
 
         <!-- TIMER -->
         <div class="card timer-card">
@@ -264,6 +323,7 @@
         </div>
 
 
+
         <!-- TODO -->
         <div class="card todo-card">
 
@@ -294,6 +354,7 @@
         </div>
 
 
+
         <!-- PLAYLIST -->
         <div class="card playlist-card">
 
@@ -320,6 +381,7 @@
         </div>
 
 
+
         <!-- QUOTE -->
         <div class="card quote-card">
 
@@ -338,6 +400,7 @@
           </button>
 
         </div>
+
 
 
         <!-- MOOD -->
@@ -361,6 +424,7 @@
       </section>
 
 
+
       <!-- NOTES -->
       <section class="card notes-card">
 
@@ -369,6 +433,7 @@
         <textarea placeholder="write notes here..."></textarea>
 
       </section>
+
 
 
       <!-- PENGUIN -->
@@ -405,57 +470,72 @@
 
 
 
-    <!-- ================= -->
+
+
+    <!-- ====================== -->
     <!-- FAVORITES -->
-    <!-- ================= -->
+    <!-- ====================== -->
 
-    <section id="favorites" class="placeholder-section">
+    <section id="favorites" class="tab-content">
 
-      <h1>Favorites 💕</h1>
+      <div class="placeholder-section">
 
-      <p>
-        Favorite foods, songs,
-        shows, games, aesthetics,
-        and more.
-      </p>
+        <h1>Favorites 💚</h1>
+
+        <p>
+          Favorite songs, foods,
+          games, aesthetics, and more.
+        </p>
+
+      </div>
 
     </section>
 
 
 
-    <!-- ================= -->
+
+
+    <!-- ====================== -->
     <!-- PLAYLIST -->
-    <!-- ================= -->
+    <!-- ====================== -->
 
-    <section id="playlist" class="placeholder-section">
+    <section id="playlist" class="tab-content">
 
-      <h1>Playlist 🎧</h1>
+      <div class="placeholder-section">
 
-      <p>
-        Add Spotify embeds or
-        favorite songs here.
-      </p>
+        <h1>Playlist 🎧</h1>
+
+        <p>
+          Add Spotify playlists and favorite songs here.
+        </p>
+
+      </div>
 
     </section>
 
 
 
-    <!-- ================= -->
+
+
+    <!-- ====================== -->
     <!-- CONTACT -->
-    <!-- ================= -->
+    <!-- ====================== -->
 
-    <section id="contact" class="placeholder-section">
+    <section id="contact" class="tab-content">
 
-      <h1>Contact ✉</h1>
+      <div class="placeholder-section">
 
-      <p>
-        Add socials or cute links here.
-      </p>
+        <h1>Contact ✉</h1>
+
+        <p>
+          Add socials and cute links here.
+        </p>
+
+      </div>
 
     </section>
 
   </main>
-
 
   <!-- JS -->
   <script src="script.js"></script>

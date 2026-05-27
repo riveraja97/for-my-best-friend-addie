@@ -1,14 +1,58 @@
+// script.js
+
+/* TAB SWITCHING */
+
+const tabButtons =
+  document.querySelectorAll(".tab-btn");
+
+const tabContents =
+  document.querySelectorAll(".tab-content");
+
+tabButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const target =
+      button.dataset.tab;
+
+    /* REMOVE ACTIVE */
+
+    tabButtons.forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+    tabContents.forEach(content => {
+      content.classList.remove("active");
+    });
+
+    /* ADD ACTIVE */
+
+    button.classList.add("active");
+
+    document
+      .getElementById(target)
+      .classList.add("active");
+
+  });
+
+});
+
+
 /* TIMER */
 
 let timeLeft = 25 * 60;
 let timer;
 
-const timerDisplay = document.getElementById("timer");
+const timerDisplay =
+  document.getElementById("timer");
 
 function updateTimer() {
 
-  const minutes = Math.floor(timeLeft / 60);
-  const seconds = timeLeft % 60;
+  const minutes =
+    Math.floor(timeLeft / 60);
+
+  const seconds =
+    timeLeft % 60;
 
   timerDisplay.textContent =
     `${minutes}:${seconds.toString().padStart(2, "0")}`;
@@ -19,8 +63,11 @@ function startTimer() {
   timer = setInterval(() => {
 
     if (timeLeft > 0) {
+
       timeLeft--;
+
       updateTimer();
+
     }
 
   }, 1000);
@@ -67,9 +114,11 @@ addTaskBtn.addEventListener("click", () => {
 
   if (taskInput.value === "") return;
 
-  const li = document.createElement("li");
+  const li =
+    document.createElement("li");
 
-  li.textContent = "☐ " + taskInput.value;
+  li.textContent =
+    "☐ " + taskInput.value;
 
   taskList.appendChild(li);
 
@@ -98,6 +147,7 @@ document
     const randomQuote =
       quotes[Math.floor(Math.random() * quotes.length)];
 
-    quoteText.textContent = randomQuote;
+    quoteText.textContent =
+      randomQuote;
 
   });
