@@ -1,69 +1,243 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Study Corner</title>
+
+  <!-- GOOGLE FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="logo">
+      ✧ her world
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Her</a></li>
+      <li><a href="#">Gallery</a></li>
+      <li><a class="active" href="#">Study Corner</a></li>
+      <li><a href="#">Favorites</a></li>
+      <li><a href="#">Playlist</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+
+  </nav>
+
+
+  <!-- MAIN CONTAINER -->
+  <main class="container">
+
+    <!-- HERO -->
+    <section class="hero-section">
+
+      <div class="hero-text">
+        <h1>study corner ✨</h1>
+        <p>focus • plan • grow</p>
+      </div>
+
+      <div class="hero-image">
+        cozy desk image here
+      </div>
+
+    </section>
+
+
+    <!-- DASHBOARD -->
+    <section class="dashboard-grid">
+
+      <!-- TIMER -->
+      <div class="card timer-card">
+
+        <h2>POMODORO TIMER ⏰</h2>
+
+        <div class="timer-circle">
+          <span id="timer">25:00</span>
+        </div>
+
+        <p class="focus-text">Focus Time</p>
+
+        <div class="timer-buttons">
+          <button id="startBtn">Start</button>
+          <button id="pauseBtn">Pause</button>
+          <button id="resetBtn">Reset</button>
+        </div>
+
+      </div>
+
+
+      <!-- TODO -->
+      <div class="card todo-card">
+
+        <h2>TO-DO LIST 📝</h2>
+
+        <div class="todo-input">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="Add a task..."
+          >
+
+          <button id="addTask">+</button>
+        </div>
+
+        <ul id="taskList">
+          <li>☐ Finish homework</li>
+          <li>☐ Study biology</li>
+          <li>☐ Review notes</li>
+        </ul>
+
+      </div>
+
+
+      <!-- PLAYLIST -->
+      <div class="card playlist-card">
+
+        <h2>STUDY PLAYLISTS 🎵</h2>
+
+        <div class="playlist-item">
+
+          <div class="playlist-cover"></div>
+
+          <div class="playlist-info">
+            <h3>late night study</h3>
+            <p>lofi • calm • focus</p>
+          </div>
+
+          <div class="play-button">▶</div>
+
+        </div>
+
+
+        <div class="playlist-item">
+
+          <div class="playlist-cover"></div>
+
+          <div class="playlist-info">
+            <h3>locked in mode</h3>
+            <p>beats • motivation</p>
+          </div>
+
+          <div class="play-button">▶</div>
+
+        </div>
+
+      </div>
+
+
+      <!-- QUOTE -->
+      <div class="card quote-card">
+
+        <h2>QUOTE OF THE DAY 💭</h2>
+
+        <div class="quote-box">
+          <p id="quoteText">
+            “Discipline today leads to freedom tomorrow.”
           </p>
         </div>
 
-        <button id="newQuote">New Quote</button>
+        <button id="newQuote">
+          New Quote ↻
+        </button>
+
       </div>
+
 
       <!-- RESOURCES -->
       <div class="card resources-card">
+
         <h2>STUDY RESOURCES 📚</h2>
 
         <ul>
-          <li>Class Notes</li>
-          <li>Useful Websites</li>
-          <li>Study Tips</li>
-          <li>Past Papers</li>
-          <li>Downloads</li>
+          <li>📁 Notes</li>
+          <li>📁 Study Tips</li>
+          <li>📁 Downloads</li>
+          <li>📁 Practice Tests</li>
         </ul>
+
       </div>
+
 
       <!-- MOOD -->
       <div class="card mood-card">
+
         <h2>MOOD CHECK-IN ♡</h2>
 
         <div class="mood-grid">
+          <button>😊</button>
           <button>😴</button>
           <button>⭐</button>
-          <button>😊</button>
-          <button>😐</button>
           <button>☁</button>
           <button>😵</button>
+          <button>💻</button>
         </div>
+
       </div>
+
     </section>
+
 
     <!-- NOTES -->
     <section class="card notes-card">
+
       <h2>QUICK NOTES ✎</h2>
-      <textarea placeholder="jot down anything here..."></textarea>
+
+      <textarea placeholder="write notes here..."></textarea>
+
     </section>
 
-    <!-- PENGUIN BUDDY -->
+
+    <!-- PENGUIN -->
     <section class="penguin-section">
+
       <div class="speech-bubble left">
-        hey bestie! 💧<br>
-        don't forget to drink water!
+        hey bestie 💧<br>
+        drink water!
       </div>
 
       <div class="penguin">
+
         <div class="penguin-body">
+
           <div class="eye left-eye"></div>
           <div class="eye right-eye"></div>
+
           <div class="beak"></div>
+
           <div class="blush left-blush"></div>
           <div class="blush right-blush"></div>
+
         </div>
+
       </div>
 
       <div class="speech-bubble right">
-        stay focused,<br>
-        you've got this! ✨
+        stay focused ✨
       </div>
+
     </section>
 
   </main>
 
+
+  <!-- JAVASCRIPT -->
   <script src="script.js"></script>
+
 </body>
 </html>
