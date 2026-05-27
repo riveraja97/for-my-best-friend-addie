@@ -6,6 +6,7 @@ let timer;
 const timerDisplay = document.getElementById("timer");
 
 function updateTimer() {
+
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
 
@@ -30,6 +31,7 @@ function pauseTimer() {
 }
 
 function resetTimer() {
+
   clearInterval(timer);
 
   timeLeft = 25 * 60;
@@ -52,11 +54,14 @@ document
 
 /* TODO LIST */
 
-const addTaskBtn = document.getElementById("addTask");
+const addTaskBtn =
+  document.getElementById("addTask");
 
-const taskInput = document.getElementById("taskInput");
+const taskInput =
+  document.getElementById("taskInput");
 
-const taskList = document.getElementById("taskList");
+const taskList =
+  document.getElementById("taskList");
 
 addTaskBtn.addEventListener("click", () => {
 
@@ -83,7 +88,8 @@ const quotes = [
   "Consistency beats motivation."
 ];
 
-const quoteText = document.getElementById("quoteText");
+const quoteText =
+  document.getElementById("quoteText");
 
 document
   .getElementById("newQuote")

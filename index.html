@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>Study Corner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- GOOGLE FONT -->
+  <title>Her World ✨</title>
+
+  <!-- FONT -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -17,6 +18,7 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -29,13 +31,13 @@
     </div>
 
     <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About Her</a></li>
-      <li><a href="#">Gallery</a></li>
-      <li><a class="active" href="#">Study Corner</a></li>
-      <li><a href="#">Favorites</a></li>
-      <li><a href="#">Playlist</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Her</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#study">Study Corner</a></li>
+      <li><a href="#favorites">Favorites</a></li>
+      <li><a href="#playlist">Playlist</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
 
   </nav>
@@ -44,199 +46,418 @@
   <!-- MAIN CONTAINER -->
   <main class="container">
 
-    <!-- HERO -->
-    <section class="hero-section">
 
-      <div class="hero-text">
+    <!-- ========================= -->
+    <!-- HOME / NEWSLETTER SECTION -->
+    <!-- ========================= -->
+
+    <section id="home">
+
+      <!-- FEATURED ARTICLE -->
+      <section class="featured-article">
+
+        <div class="featured-text">
+
+          <p class="breaking-news">
+            ✦ BREAKING NEWS ✦
+          </p>
+
+          <h1>
+            she survived another semester
+          </h1>
+
+          <p class="article-description">
+            Sources confirm she celebrated with iced coffee,
+            late-night snacks, and a 6-hour playlist session.
+          </p>
+
+          <button class="read-more-btn">
+            Read More →
+          </button>
+
+        </div>
+
+        <div class="featured-image">
+          featured image here
+        </div>
+
+      </section>
+
+
+      <!-- NEWS GRID -->
+      <section class="news-grid">
+
+        <div class="news-card">
+
+          <p class="news-category">
+            playlist update 🎧
+          </p>
+
+          <h3>
+            same song played 47 times this week
+          </h3>
+
+          <p>
+            Experts are calling it emotionally significant.
+          </p>
+
+        </div>
+
+
+        <div class="news-card">
+
+          <p class="news-category">
+            campus news ☕
+          </p>
+
+          <h3>
+            emotional support coffee acquired again
+          </h3>
+
+          <p>
+            Witnesses say productivity increased by 2%.
+          </p>
+
+        </div>
+
+
+        <div class="news-card">
+
+          <p class="news-category">
+            lifestyle 🍓
+          </p>
+
+          <h3>
+            pinterest board reaches dangerous levels
+          </h3>
+
+          <p>
+            Authorities fear she may become too aesthetic.
+          </p>
+
+        </div>
+
+
+        <div class="news-card">
+
+          <p class="news-category">
+            daily report ✨
+          </p>
+
+          <h3>
+            main character energy spotted on campus
+          </h3>
+
+          <p>
+            Sources confirm dramatic walking playlists involved.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- LIVE UPDATES -->
+      <section class="live-updates">
+
+        <h2>LIVE UPDATES ✦</h2>
+
+        <div class="update">
+          <span>11:42 AM</span>
+          <p>currently procrastinating</p>
+        </div>
+
+        <div class="update">
+          <span>2:17 PM</span>
+          <p>got a sweet treat after studying</p>
+        </div>
+
+        <div class="update">
+          <span>6:03 PM</span>
+          <p>locked in for finals week</p>
+        </div>
+
+      </section>
+
+    </section>
+
+
+
+    <!-- ================= -->
+    <!-- ABOUT HER SECTION -->
+    <!-- ================= -->
+
+    <section id="about" class="placeholder-section">
+
+      <h1>About Her ✨</h1>
+
+      <p>
+        Add photos, favorite memories,
+        personality descriptions, fun facts,
+        and anything special here.
+      </p>
+
+    </section>
+
+
+
+    <!-- ================= -->
+    <!-- GALLERY SECTION -->
+    <!-- ================= -->
+
+    <section id="gallery" class="placeholder-section">
+
+      <h1>Gallery 📸</h1>
+
+      <p>
+        Add cute photo collages here.
+      </p>
+
+    </section>
+
+
+
+    <!-- ================= -->
+    <!-- STUDY CORNER -->
+    <!-- ================= -->
+
+    <section id="study" class="study-corner">
+
+      <div class="study-header">
         <h1>study corner ✨</h1>
         <p>focus • plan • grow</p>
       </div>
 
-      <div class="hero-image">
-        cozy desk image here
-      </div>
 
-    </section>
+      <!-- DASHBOARD -->
+      <section class="dashboard-grid">
 
+        <!-- TIMER -->
+        <div class="card timer-card">
 
-    <!-- DASHBOARD -->
-    <section class="dashboard-grid">
+          <h2>POMODORO TIMER ⏰</h2>
 
-      <!-- TIMER -->
-      <div class="card timer-card">
-
-        <h2>POMODORO TIMER ⏰</h2>
-
-        <div class="timer-circle">
-          <span id="timer">25:00</span>
-        </div>
-
-        <p class="focus-text">Focus Time</p>
-
-        <div class="timer-buttons">
-          <button id="startBtn">Start</button>
-          <button id="pauseBtn">Pause</button>
-          <button id="resetBtn">Reset</button>
-        </div>
-
-      </div>
-
-
-      <!-- TODO -->
-      <div class="card todo-card">
-
-        <h2>TO-DO LIST 📝</h2>
-
-        <div class="todo-input">
-          <input
-            type="text"
-            id="taskInput"
-            placeholder="Add a task..."
-          >
-
-          <button id="addTask">+</button>
-        </div>
-
-        <ul id="taskList">
-          <li>☐ Finish homework</li>
-          <li>☐ Study biology</li>
-          <li>☐ Review notes</li>
-        </ul>
-
-      </div>
-
-
-      <!-- PLAYLIST -->
-      <div class="card playlist-card">
-
-        <h2>STUDY PLAYLISTS 🎵</h2>
-
-        <div class="playlist-item">
-
-          <div class="playlist-cover"></div>
-
-          <div class="playlist-info">
-            <h3>late night study</h3>
-            <p>lofi • calm • focus</p>
+          <div class="timer-circle">
+            <span id="timer">25:00</span>
           </div>
 
-          <div class="play-button">▶</div>
-
-        </div>
-
-
-        <div class="playlist-item">
-
-          <div class="playlist-cover"></div>
-
-          <div class="playlist-info">
-            <h3>locked in mode</h3>
-            <p>beats • motivation</p>
-          </div>
-
-          <div class="play-button">▶</div>
-
-        </div>
-
-      </div>
-
-
-      <!-- QUOTE -->
-      <div class="card quote-card">
-
-        <h2>QUOTE OF THE DAY 💭</h2>
-
-        <div class="quote-box">
-          <p id="quoteText">
-            “Discipline today leads to freedom tomorrow.”
+          <p class="focus-text">
+            Focus Time
           </p>
+
+          <div class="timer-buttons">
+
+            <button id="startBtn">
+              Start
+            </button>
+
+            <button id="pauseBtn">
+              Pause
+            </button>
+
+            <button id="resetBtn">
+              Reset
+            </button>
+
+          </div>
+
         </div>
 
-        <button id="newQuote">
-          New Quote ↻
-        </button>
 
-      </div>
+        <!-- TODO -->
+        <div class="card todo-card">
 
+          <h2>TO-DO LIST 📝</h2>
 
-      <!-- RESOURCES -->
-      <div class="card resources-card">
+          <div class="todo-input">
 
-        <h2>STUDY RESOURCES 📚</h2>
+            <input
+              type="text"
+              id="taskInput"
+              placeholder="Add a task..."
+            >
 
-        <ul>
-          <li>📁 Notes</li>
-          <li>📁 Study Tips</li>
-          <li>📁 Downloads</li>
-          <li>📁 Practice Tests</li>
-        </ul>
+            <button id="addTask">
+              +
+            </button>
 
-      </div>
+          </div>
 
+          <ul id="taskList">
 
-      <!-- MOOD -->
-      <div class="card mood-card">
+            <li>☐ Finish homework</li>
+            <li>☐ Study biology</li>
+            <li>☐ Review notes</li>
 
-        <h2>MOOD CHECK-IN ♡</h2>
+          </ul>
 
-        <div class="mood-grid">
-          <button>😊</button>
-          <button>😴</button>
-          <button>⭐</button>
-          <button>☁</button>
-          <button>😵</button>
-          <button>💻</button>
         </div>
 
-      </div>
+
+        <!-- PLAYLIST -->
+        <div class="card playlist-card">
+
+          <h2>STUDY PLAYLISTS 🎵</h2>
+
+          <div class="playlist-item">
+
+            <div class="playlist-cover"></div>
+
+            <div class="playlist-info">
+
+              <h3>late night study</h3>
+
+              <p>lofi • calm • focus</p>
+
+            </div>
+
+            <div class="play-button">
+              ▶
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- QUOTE -->
+        <div class="card quote-card">
+
+          <h2>QUOTE OF THE DAY 💭</h2>
+
+          <div class="quote-box">
+
+            <p id="quoteText">
+              “Discipline today leads to freedom tomorrow.”
+            </p>
+
+          </div>
+
+          <button id="newQuote">
+            New Quote ↻
+          </button>
+
+        </div>
+
+
+        <!-- MOOD -->
+        <div class="card mood-card">
+
+          <h2>MOOD CHECK-IN ♡</h2>
+
+          <div class="mood-grid">
+
+            <button>😊</button>
+            <button>😴</button>
+            <button>⭐</button>
+            <button>☁</button>
+            <button>😵</button>
+            <button>💻</button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- NOTES -->
+      <section class="card notes-card">
+
+        <h2>QUICK NOTES ✎</h2>
+
+        <textarea placeholder="write notes here..."></textarea>
+
+      </section>
+
+
+      <!-- PENGUIN -->
+      <section class="penguin-section">
+
+        <div class="speech-bubble">
+          hey bestie 💧<br>
+          drink water!
+        </div>
+
+        <div class="penguin">
+
+          <div class="penguin-body">
+
+            <div class="eye left-eye"></div>
+            <div class="eye right-eye"></div>
+
+            <div class="beak"></div>
+
+            <div class="blush left-blush"></div>
+            <div class="blush right-blush"></div>
+
+          </div>
+
+        </div>
+
+        <div class="speech-bubble">
+          stay focused ✨
+        </div>
+
+      </section>
 
     </section>
 
 
-    <!-- NOTES -->
-    <section class="card notes-card">
 
-      <h2>QUICK NOTES ✎</h2>
+    <!-- ================= -->
+    <!-- FAVORITES -->
+    <!-- ================= -->
 
-      <textarea placeholder="write notes here..."></textarea>
+    <section id="favorites" class="placeholder-section">
+
+      <h1>Favorites 💕</h1>
+
+      <p>
+        Favorite foods, songs,
+        shows, games, aesthetics,
+        and more.
+      </p>
 
     </section>
 
 
-    <!-- PENGUIN -->
-    <section class="penguin-section">
 
-      <div class="speech-bubble left">
-        hey bestie 💧<br>
-        drink water!
-      </div>
+    <!-- ================= -->
+    <!-- PLAYLIST -->
+    <!-- ================= -->
 
-      <div class="penguin">
+    <section id="playlist" class="placeholder-section">
 
-        <div class="penguin-body">
+      <h1>Playlist 🎧</h1>
 
-          <div class="eye left-eye"></div>
-          <div class="eye right-eye"></div>
+      <p>
+        Add Spotify embeds or
+        favorite songs here.
+      </p>
 
-          <div class="beak"></div>
+    </section>
 
-          <div class="blush left-blush"></div>
-          <div class="blush right-blush"></div>
 
-        </div>
 
-      </div>
+    <!-- ================= -->
+    <!-- CONTACT -->
+    <!-- ================= -->
 
-      <div class="speech-bubble right">
-        stay focused ✨
-      </div>
+    <section id="contact" class="placeholder-section">
+
+      <h1>Contact ✉</h1>
+
+      <p>
+        Add socials or cute links here.
+      </p>
 
     </section>
 
   </main>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- JS -->
   <script src="script.js"></script>
 
 </body>
