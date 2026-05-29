@@ -1,5 +1,3 @@
-// script.js
-
 /* TAB SWITCHING */
 
 const tabButtons =
