@@ -39,7 +39,7 @@ tabButtons.forEach(button => {
 /* TIMER */
 
 let timeLeft = 25 * 60;
-let timer;
+let timer = null;
 
 const timerDisplay =
   document.getElementById("timer");
@@ -53,10 +53,16 @@ function updateTimer() {
     timeLeft % 60;
 
   timerDisplay.textContent =
-    `${minutes}:${seconds.toString().padStart(2, "0")}`;
+    `${minutes}:${seconds
+      .toString()
+      .padStart(2, "0")}`;
 }
 
 function startTimer() {
+
+  /* Prevent multiple timers */
+
+  if (timer !== null) return;
 
   timer = setInterval(() => {
 
@@ -66,35 +72,66 @@ function startTimer() {
 
       updateTimer();
 
+    } else {
+
+      clearInterval(timer);
+
+      timer = null;
+
+      alert(
+        "🎉 Pomodoro complete! Time for a break!"
+      );
+
     }
 
   }, 1000);
+
 }
 
 function pauseTimer() {
+
   clearInterval(timer);
+
+  timer = null;
+
 }
 
 function resetTimer() {
 
   clearInterval(timer);
 
+  timer = null;
+
   timeLeft = 25 * 60;
 
   updateTimer();
+
 }
 
 document
   .getElementById("startBtn")
-  .addEventListener("click", startTimer);
+  ?.addEventListener(
+    "click",
+    startTimer
+  );
 
 document
   .getElementById("pauseBtn")
-  .addEventListener("click", pauseTimer);
+  ?.addEventListener(
+    "click",
+    pauseTimer
+  );
 
 document
   .getElementById("resetBtn")
-  .addEventListener("click", resetTimer);
+  ?.addEventListener(
+    "click",
+    resetTimer
+  );
+
+/* Show 25:00 on page load */
+
+updateTimer();
 
 
 /* TODO LIST */
@@ -150,183 +187,358 @@ document
 
   });
 
-/* CAT WISDOM */
+/* ========================= */
+/* CAT THERAPY CENTER */
+/* ========================= */
 
-const wisdomQuotes = [
-  "You don't have to solve everything today.",
-  "The cat believes in you.",
-  "Rest is productive too.",
-  "Drink water immediately.",
-  "A nap is sometimes the answer.",
-  "You are doing better than you think."
+
+/* CAT REPORT DATABASE */
+
+const catProfiles = [
+
+{
+  title: "Maximum Cozy Cat ☁️",
+  mood: "Maximum Cozy ☁️",
+  loaf: "15/10",
+  threat: "Stealing Blankets",
+  support: "★★★★★",
+  advice: "Make a warm drink and slow down today.",
+  wisdom: "Rest is productive too."
+},
+
+{
+  title: "Academic Weapon Cat 📚",
+  mood: "Focused & Productive",
+  loaf: "10/10",
+  threat: "Finishing Assignments",
+  support: "★★★★☆",
+  advice: "Keep going. You're closer than you think.",
+  wisdom: "Small progress is still progress."
+},
+
+{
+  title: "Tiny Goblin Cat 😈",
+  mood: "Chaotic",
+  loaf: "4/10",
+  threat: "Causing Problems",
+  support: "★★★☆☆",
+  advice: "Get a snack before making decisions.",
+  wisdom: "A little chaos is okay."
+},
+
+{
+  title: "Sleepy Baby Cat 😴",
+  mood: "Very Sleepy",
+  loaf: "14/10",
+  threat: "Absolutely None",
+  support: "★★★★★",
+  advice: "Drink water and rest.",
+  wisdom: "You don't have to solve everything today."
+},
+
+{
+  title: "Zoomie Cat ⚡",
+  mood: "Maximum Energy",
+  loaf: "7/10",
+  threat: "Running Through Hallways",
+  support: "★★★★☆",
+  advice: "Move your body for a few minutes.",
+  wisdom: "Energy creates momentum."
+},
+
+{
+  title: "Emotional Support Cat 💚",
+  mood: "Comforting",
+  loaf: "12/10",
+  threat: "Too Much Love",
+  support: "★★★★★",
+  advice: "Be kinder to yourself.",
+  wisdom: "You are doing better than you think."
+},
+
+{
+  title: "Forest Guardian Cat 🌿",
+  mood: "Peaceful",
+  loaf: "13/10",
+  threat: "Touching Grass",
+  support: "★★★★★",
+  advice: "Go outside and get fresh air.",
+  wisdom: "Nature heals more than you realize."
+}
+
+];
+
+
+/* DAILY CAT REPORT */
+
+async function generateCatReport() {
+
+  try {
+
+    const response =
+      await fetch(
+        "https://api.thecatapi.com/v1/images/search"
+      );
+
+    const data =
+      await response.json();
+
+    const image =
+      document.getElementById(
+        "reportCatImg"
+      );
+
+    if (image) {
+      image.src = data[0].url;
+    }
+
+  } catch(error) {
+
+    console.error(
+      "Cat API failed:",
+      error
+    );
+
+  }
+
+  const report =
+    catProfiles[
+      Math.floor(
+        Math.random() *
+        catProfiles.length
+      )
+    ];
+
+  document
+    .getElementById("catTitle")
+    ?.replaceChildren(
+      document.createTextNode(
+        report.title
+      )
+    );
+
+  document
+    .getElementById("catMood")
+    .textContent =
+    report.mood;
+
+  document
+    .getElementById("loafRating")
+    .textContent =
+    report.loaf;
+
+  document
+    .getElementById("threatLevel")
+    .textContent =
+    report.threat;
+
+  document
+    .getElementById("supportLevel")
+    .textContent =
+    report.support;
+
+  document
+    .getElementById("catAdvice")
+    .textContent =
+    report.advice;
+
+  document
+    .getElementById("catWisdom")
+    .textContent =
+    report.wisdom;
+
+}
+
+document
+  .getElementById("newReport")
+  ?.addEventListener(
+    "click",
+    generateCatReport
+  );
+
+/* LOAD FIRST REPORT */
+
+generateCatReport();
+
+
+/* ========================= */
+/* CAT FORTUNE BUTTON */
+/* ========================= */
+
+const fortunes = [
+
+  "A sweet treat is in your future 🍓",
+
+  "Today is a good day to start fresh ✨",
+
+  "An unexpected cat will improve your mood 🐱",
+
+  "The universe recommends hydration 💧",
+
+  "Your hard work will pay off soon 🌿",
+
+  "Something good is coming your way 💚",
+
+  "A nap may reveal important wisdom 😴",
+
+  "You will survive this week, probably ⭐",
+
+  "A cozy evening awaits you ☁️",
+
+  "Trust yourself more than you do now 🌸"
+
 ];
 
 document
-.getElementById("newWisdom")
-?.addEventListener("click",()=>{
+  .getElementById("newFortune")
+  ?.addEventListener("click", () => {
 
-  document.getElementById("catWisdom")
-  .textContent =
-  wisdomQuotes[
-    Math.floor(
-      Math.random()*wisdomQuotes.length
-    )
-  ];
+    const fortune =
+      fortunes[
+        Math.floor(
+          Math.random() *
+          fortunes.length
+        )
+      ];
 
-});
+    document
+      .getElementById("catFortune")
+      .textContent =
+      fortune;
 
-
-/* CAT REPORT */
-
-const moods = [
-  "Sleepy",
-  "Zoomies",
-  "Loaf Mode",
-  "Hungry",
-  "Judging Everyone"
-];
-
-const threats = [
-  "Wants Treats",
-  "Will Steal Blanket",
-  "Extremely Cozy",
-  "Demands Attention"
-];
-
-const advice = [
-  "Drink water.",
-  "Take a break.",
-  "Go outside.",
-  "Stretch for 30 seconds.",
-  "Be kind to yourself."
-];
-
-document
-.getElementById("newReport")
-?.addEventListener("click",()=>{
-
-  document.getElementById("catMood")
-  .textContent =
-  moods[Math.floor(Math.random()*moods.length)];
-
-  document.getElementById("threatLevel")
-  .textContent =
-  threats[Math.floor(Math.random()*threats.length)];
-
-  document.getElementById("catAdvice")
-  .textContent =
-  advice[Math.floor(Math.random()*advice.length)];
-
-});
+  });
 
 
+/* ========================= */
 /* NAP GENERATOR */
+/* ========================= */
 
 const napAnswers = [
+
   "Absolutely.",
+
   "Yes. Immediately.",
+
   "The cat recommends it.",
+
   "Only after drinking water.",
-  "A tiny nap won't hurt."
+
+  "A tiny nap won't hurt.",
+
+  "10 minute power nap approved.",
+
+  "Your cat lawyer says yes."
+
 ];
 
 document
-.getElementById("napButton")
-?.addEventListener("click",()=>{
+  .getElementById("napButton")
+  ?.addEventListener("click", () => {
 
-  document.getElementById("napResult")
-  .textContent =
-  napAnswers[
-    Math.floor(
-      Math.random()*napAnswers.length
-    )
-  ];
+    document
+      .getElementById("napResult")
+      .textContent =
+      napAnswers[
+        Math.floor(
+          Math.random() *
+          napAnswers.length
+        )
+      ];
 
-});
+  });
 
 
+/* ========================= */
 /* WATER TRACKER */
+/* ========================= */
 
 let waterCount = 0;
 
 document
-.getElementById("drinkWater")
-?.addEventListener("click",()=>{
+  .getElementById("drinkWater")
+  ?.addEventListener("click", () => {
 
-  waterCount++;
+    waterCount++;
 
-  document.getElementById("waterCount")
-  .textContent = waterCount;
+    document
+      .getElementById("waterCount")
+      .textContent =
+      waterCount;
 
-});
+  });
 
 
+/* ========================= */
 /* TOUCH GRASS */
+/* ========================= */
 
 const grassQuotes = [
+
   "Go stand outside for 5 minutes 🌿",
+
   "Touch one leaf today 🍃",
+
   "Sunlight would be good right now ☀️",
+
   "Take a short walk 🌱",
-  "Fresh air unlocked ✨"
+
+  "Fresh air unlocked ✨",
+
+  "The Forest Guardian Cat approves 🌿"
+
 ];
 
 document
-.getElementById("grassButton")
-?.addEventListener("click",()=>{
+  .getElementById("grassButton")
+  ?.addEventListener("click", () => {
 
-  document.getElementById("grassText")
-  .textContent =
-  grassQuotes[
-    Math.floor(
-      Math.random()*grassQuotes.length
-    )
-  ];
+    document
+      .getElementById("grassText")
+      .textContent =
+      grassQuotes[
+        Math.floor(
+          Math.random() *
+          grassQuotes.length
+        )
+      ];
 
-});
+  });
 
 
-/* PETTABLE CAT */
+/* ========================= */
+/* PET THE CAT */
+/* ========================= */
 
 const petReplies = [
+
   "purr 🐾",
+
   "the cat loves you",
+
   "happy loaf noises",
+
   "you have been blessed",
-  "the cat approves"
+
+  "the cat approves",
+
+  "friendship increased 💚",
+
+  "maximum happiness achieved ✨"
+
 ];
 
 document
-.getElementById("petCat")
-?.addEventListener("click",()=>{
+  .getElementById("petCat")
+  ?.addEventListener("click", () => {
 
-  document.getElementById("petResponse")
-  .textContent =
-  petReplies[
-    Math.floor(
-      Math.random()*petReplies.length
-    )
-  ];
+    document
+      .getElementById("petResponse")
+      .textContent =
+      petReplies[
+        Math.floor(
+          Math.random() *
+          petReplies.length
+        )
+      ];
 
-});
-
-async function getRandomCat() {
-
-  const response =
-    await fetch(
-      "https://api.thecatapi.com/v1/images/search"
-    );
-
-  const data =
-    await response.json();
-
-  document
-    .getElementById("randomCatImg")
-    .src = data[0].url;
-}
-
-document
-  .getElementById("newCat")
-  .addEventListener("click", getRandomCat);
-
-getRandomCat();
+  });
