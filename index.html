@@ -66,9 +66,11 @@
         <button class="tab-btn" data-tab="playlist">
           Playlist
         </button>
-      </li>
-
-      <li>
+<li>
+  <button class="tab-btn" data-tab="cats">
+    Cats 🐱
+  </button>
+</li>
         <button class="tab-btn" data-tab="contact">
           Contact
         </button>
@@ -77,8 +79,6 @@
     </ul>
 
   </nav>
-
-
 
   <!-- MAIN CONTAINER -->
   <main class="container">
@@ -366,9 +366,6 @@
     </section>
 
 
-
-
-
     <!-- ====================== -->
     <!-- STUDY CORNER -->
     <!-- ====================== -->
@@ -612,9 +609,230 @@
 
     </section>
 
+<!-- ====================== -->
+<!-- CATS PAGE -->
+<!-- ====================== -->
+
+<section id="cats" class="tab-content">
+
+  <div class="cats-header">
+
+    <h1>healing cats 🐾</h1>
+
+    <p>
+      for stressful days, tired days,
+      and every day in between
+    </p>
+
+  </div>
+  
+  <div class="cat-generator card">
+
+  <h2>🐾 Emergency Cat Generator</h2>
+
+  <img
+    id="randomCatImg"
+    src=""
+    alt="Random Cat"
+  >
+
+  <button id="newCat">
+    Generate Cat
+  </button>
+
+</div>
+
+  <!-- CAT REPORT -->
+
+  <div class="cat-report card">
+
+    <h2>🐱 Today's Cat Report</h2>
+
+    <div class="report-grid">
+
+      <div>
+        <strong>Mood:</strong>
+        <span id="catMood">Sleepy</span>
+      </div>
+
+      <div>
+        <strong>Loaf Rating:</strong>
+        <span id="loafRating">12/10</span>
+      </div>
+
+      <div>
+        <strong>Threat Level:</strong>
+        <span id="threatLevel">Wants Treats</span>
+      </div>
+
+      <div>
+        <strong>Advice:</strong>
+        <span id="catAdvice">
+          Drink water and be kind to yourself.
+        </span>
+      </div>
+
+    </div>
+
+    <button id="newReport">
+      Generate New Report 🐾
+    </button>
+
+  </div>
 
 
+  <!-- CAT WISDOM -->
 
+  <div class="cat-wisdom card">
+
+    <h2>✨ Today's Cat Wisdom</h2>
+
+    <p id="catWisdom">
+      Sometimes the most productive thing you can do is nap.
+    </p>
+
+    <button id="newWisdom">
+      New Wisdom
+    </button>
+
+  </div>
+
+
+  <!-- NAP GENERATOR -->
+
+  <div class="nap-generator card">
+
+    <h2>😴 Should Addie Take A Nap?</h2>
+
+    <p id="napResult">
+      Absolutely.
+    </p>
+
+    <button id="napButton">
+      Decide For Me
+    </button>
+
+  </div>
+
+
+  <!-- HYDRATION -->
+
+  <div class="hydration card">
+
+    <h2>💧 Water Tracker</h2>
+
+    <p>
+      Glasses Drank:
+      <span id="waterCount">0</span>
+    </p>
+
+    <button id="drinkWater">
+      I Drank Water!
+    </button>
+
+  </div>
+
+
+  <!-- TOUCH GRASS -->
+
+  <div class="grass card">
+
+    <h2>🌱 Touch Grass Reminder</h2>
+
+    <p id="grassText">
+      Have you gone outside today?
+    </p>
+
+    <button id="grassButton">
+      Remind Me
+    </button>
+
+  </div>
+
+
+  <!-- COMFORT PLAYLIST -->
+
+  <div class="comfort-playlist card">
+
+    <h2>🎵 Emergency Comfort Playlist</h2>
+
+    <ul>
+
+      <li>☁ Cozy Rain Sounds</li>
+      <li>☕ Coffee Shop Ambience</li>
+      <li>🌿 Forest Sounds</li>
+      <li>🎹 Soft Piano Mix</li>
+      <li>🌙 Late Night Lofi</li>
+
+    </ul>
+
+  </div>
+
+
+  <!-- PETTABLE CAT -->
+
+  <div class="pet-cat card">
+
+    <h2>🐈 Pet The Cat</h2>
+
+    <div id="petCat">
+      🐱
+    </div>
+
+    <p id="petResponse">
+      click the cat!
+    </p>
+
+  </div>
+
+
+  <!-- CAT GALLERY -->
+
+  <div class="cat-grid">
+
+    <div class="cat-card">
+
+      <img src="images/cat1.jpg" alt="Cat">
+
+      <p>
+        everything will be okay 💚
+      </p>
+
+    </div>
+
+    <div class="cat-card">
+
+      <img src="images/cat2.jpg" alt="Cat">
+
+      <p>
+        drink some water bestie 💧
+      </p>
+
+    </div>
+
+    <div class="cat-card">
+
+      <img src="images/cat3.jpg" alt="Cat">
+
+      <p>
+        the cat believes in you ✨
+      </p>
+
+    </div>
+
+    <div class="cat-card">
+
+      <img src="images/cat4.jpg" alt="Cat">
+
+      <p>
+        take a break if you need one 🌿
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
 
     <!-- ====================== -->
     <!-- CONTACT -->

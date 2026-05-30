@@ -149,3 +149,184 @@ document
       randomQuote;
 
   });
+
+/* CAT WISDOM */
+
+const wisdomQuotes = [
+  "You don't have to solve everything today.",
+  "The cat believes in you.",
+  "Rest is productive too.",
+  "Drink water immediately.",
+  "A nap is sometimes the answer.",
+  "You are doing better than you think."
+];
+
+document
+.getElementById("newWisdom")
+?.addEventListener("click",()=>{
+
+  document.getElementById("catWisdom")
+  .textContent =
+  wisdomQuotes[
+    Math.floor(
+      Math.random()*wisdomQuotes.length
+    )
+  ];
+
+});
+
+
+/* CAT REPORT */
+
+const moods = [
+  "Sleepy",
+  "Zoomies",
+  "Loaf Mode",
+  "Hungry",
+  "Judging Everyone"
+];
+
+const threats = [
+  "Wants Treats",
+  "Will Steal Blanket",
+  "Extremely Cozy",
+  "Demands Attention"
+];
+
+const advice = [
+  "Drink water.",
+  "Take a break.",
+  "Go outside.",
+  "Stretch for 30 seconds.",
+  "Be kind to yourself."
+];
+
+document
+.getElementById("newReport")
+?.addEventListener("click",()=>{
+
+  document.getElementById("catMood")
+  .textContent =
+  moods[Math.floor(Math.random()*moods.length)];
+
+  document.getElementById("threatLevel")
+  .textContent =
+  threats[Math.floor(Math.random()*threats.length)];
+
+  document.getElementById("catAdvice")
+  .textContent =
+  advice[Math.floor(Math.random()*advice.length)];
+
+});
+
+
+/* NAP GENERATOR */
+
+const napAnswers = [
+  "Absolutely.",
+  "Yes. Immediately.",
+  "The cat recommends it.",
+  "Only after drinking water.",
+  "A tiny nap won't hurt."
+];
+
+document
+.getElementById("napButton")
+?.addEventListener("click",()=>{
+
+  document.getElementById("napResult")
+  .textContent =
+  napAnswers[
+    Math.floor(
+      Math.random()*napAnswers.length
+    )
+  ];
+
+});
+
+
+/* WATER TRACKER */
+
+let waterCount = 0;
+
+document
+.getElementById("drinkWater")
+?.addEventListener("click",()=>{
+
+  waterCount++;
+
+  document.getElementById("waterCount")
+  .textContent = waterCount;
+
+});
+
+
+/* TOUCH GRASS */
+
+const grassQuotes = [
+  "Go stand outside for 5 minutes 🌿",
+  "Touch one leaf today 🍃",
+  "Sunlight would be good right now ☀️",
+  "Take a short walk 🌱",
+  "Fresh air unlocked ✨"
+];
+
+document
+.getElementById("grassButton")
+?.addEventListener("click",()=>{
+
+  document.getElementById("grassText")
+  .textContent =
+  grassQuotes[
+    Math.floor(
+      Math.random()*grassQuotes.length
+    )
+  ];
+
+});
+
+
+/* PETTABLE CAT */
+
+const petReplies = [
+  "purr 🐾",
+  "the cat loves you",
+  "happy loaf noises",
+  "you have been blessed",
+  "the cat approves"
+];
+
+document
+.getElementById("petCat")
+?.addEventListener("click",()=>{
+
+  document.getElementById("petResponse")
+  .textContent =
+  petReplies[
+    Math.floor(
+      Math.random()*petReplies.length
+    )
+  ];
+
+});
+
+async function getRandomCat() {
+
+  const response =
+    await fetch(
+      "https://api.thecatapi.com/v1/images/search"
+    );
+
+  const data =
+    await response.json();
+
+  document
+    .getElementById("randomCatImg")
+    .src = data[0].url;
+}
+
+document
+  .getElementById("newCat")
+  .addEventListener("click", getRandomCat);
+
+getRandomCat();
