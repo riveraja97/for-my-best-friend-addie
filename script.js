@@ -654,3 +654,191 @@ document
 });
 
 loadThoughts();
+
+/* ========================= */
+/* BESTIE CALENDAR */
+/* ========================= */
+
+const calendarGrid =
+document.getElementById("calendarGrid");
+
+const monthYear =
+document.getElementById("monthYear");
+
+const eventList =
+document.getElementById("eventList");
+
+let currentDate =
+new Date();
+
+let events =
+JSON.parse(
+localStorage.getItem("bestieEvents")
+) || {};
+
+function renderCalendar(){
+
+  const year =
+  currentDate.getFullYear();
+
+  const month =
+  currentDate.getMonth();
+
+  const firstDay =
+  new Date(year,month,1).getDay();
+
+  const daysInMonth =
+  new Date(
+    year,
+    month+1,
+    0
+  ).getDate();
+
+  monthYear.textContent =
+  currentDate.toLocaleString(
+    "default",
+    {
+      month:"long",
+      year:"numeric"
+    }
+  );
+
+  calendarGrid.innerHTML = "";
+
+  for(let i=0;i<firstDay;i++){
+
+    const blank =
+    document.createElement("div");
+
+    calendarGrid.appendChild(blank);
+
+  }
+
+  for(let day=1;
+      day<=daysInMonth;
+      day++){
+
+    const dayBox =
+    document.createElement("div");
+
+    dayBox.classList.add(
+      "calendar-day"
+    );
+
+    const key =
+    `${year}-${month}-${day}`;
+
+    let eventHTML = "";
+
+    if(events[key]){
+
+      dayBox.classList.add(
+        "has-event"
+      );
+
+      eventHTML =
+      `<div class="event-dot"></div>`;
+    }
+
+    dayBox.innerHTML =
+
+    `
+      <div
+      class="calendar-day-number">
+
+      ${day}
+
+      </div>
+
+      ${eventHTML}
+    `;
+
+    dayBox.addEventListener(
+      "click",
+      ()=>{
+
+        const title =
+        prompt(
+          "Add an adventure:"
+        );
+
+        if(!title) return;
+
+        events[key] = title;
+
+        localStorage.setItem(
+          "bestieEvents",
+          JSON.stringify(events)
+        );
+
+        renderCalendar();
+        renderEvents();
+
+      }
+    );
+
+    calendarGrid.appendChild(
+      dayBox
+    );
+
+  }
+
+}
+
+function renderEvents(){
+
+  eventList.innerHTML = "";
+
+  Object.keys(events)
+  .forEach(date=>{
+
+    eventList.innerHTML +=
+
+    `
+      <div class="event-item">
+
+        <strong>
+          ${date}
+        </strong>
+
+        <p>
+          ${events[date]}
+        </p>
+
+      </div>
+    `;
+
+  });
+
+}
+
+document
+.getElementById("prevMonth")
+?.addEventListener(
+"click",
+()=>{
+
+  currentDate.setMonth(
+  currentDate.getMonth()-1
+  );
+
+  renderCalendar();
+
+});
+
+document
+.getElementById("nextMonth")
+?.addEventListener(
+"click",
+()=>{
+
+  currentDate.setMonth(
+  currentDate.getMonth()+1
+  );
+
+  renderCalendar();
+
+});
+
+renderCalendar();
+renderEvents();
