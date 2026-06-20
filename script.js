@@ -542,3 +542,115 @@ document
       ];
 
   });
+
+/* ADDIE FACT GENERATOR */
+
+const addieFacts = [
+
+  "Currently listening to the same song for the 47th time.",
+
+  "Powered primarily by good vibes.",
+
+  "Has main character energy 24/7.",
+
+  "Can detect aesthetic Pinterest posts instantly.",
+
+  "Professional playlist curator.",
+
+  "Has a PhD in being iconic.",
+
+  "Protected by the Cat Therapy Department.",
+
+  "Known to improve the mood of nearby humans.",
+
+  "Can survive finals using determination and snacks.",
+
+  "Frequently caught being adorable."
+
+];
+
+document
+  .getElementById("newFact")
+  ?.addEventListener("click", () => {
+
+    document
+      .getElementById("addieFact")
+      .textContent =
+      addieFacts[
+        Math.floor(
+          Math.random() *
+          addieFacts.length
+        )
+      ];
+
+  });
+
+/* LATE NIGHT THOUGHTS */
+
+const thoughtInput =
+document.getElementById("thoughtInput");
+
+const thoughtFeed =
+document.getElementById("thoughtFeed");
+
+function loadThoughts(){
+
+  const thoughts =
+  JSON.parse(
+    localStorage.getItem("thoughts")
+  ) || [];
+
+  thoughtFeed.innerHTML = "";
+
+  thoughts.forEach(thought=>{
+
+    thoughtFeed.innerHTML += `
+      <div class="thought-card">
+        <div class="thought-date">
+          ${thought.date}
+        </div>
+
+        <p>${thought.text}</p>
+      </div>
+    `;
+
+  });
+
+}
+
+document
+.getElementById("saveThought")
+?.addEventListener("click",()=>{
+
+  if(
+    thoughtInput.value.trim()===""
+  ) return;
+
+  const thoughts =
+  JSON.parse(
+    localStorage.getItem("thoughts")
+  ) || [];
+
+  thoughts.unshift({
+
+    text:
+    thoughtInput.value,
+
+    date:
+    new Date()
+    .toLocaleString()
+
+  });
+
+  localStorage.setItem(
+    "thoughts",
+    JSON.stringify(thoughts)
+  );
+
+  thoughtInput.value="";
+
+  loadThoughts();
+
+});
+
+loadThoughts();
