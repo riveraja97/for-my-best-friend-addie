@@ -618,6 +618,153 @@ button:hover {
 }
 
 /* ========================= */
+/* MEMORY LANE */
+/* ========================= */
+
+.memory-header{
+
+  text-align:center;
+
+  margin-bottom:40px;
+}
+
+.memory-header h1{
+
+  font-size:3rem;
+
+  color:#496151;
+}
+
+.memory-header p{
+
+  color:#7c9482;
+}
+
+.memory-intro{
+
+  margin-bottom:25px;
+}
+
+.featured-memory{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:25px;
+
+  margin-bottom:30px;
+}
+
+.memory-photo img{
+
+  width:100%;
+
+  border-radius:24px;
+
+  height:400px;
+
+  object-fit:cover;
+}
+
+.memory-story{
+
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+.scrapbook-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(250px,1fr));
+
+  gap:20px;
+
+  margin-bottom:30px;
+}
+
+.scrapbook-card{
+
+  background:white;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+  border:1px solid #d5e4d7;
+
+  transition:.3s;
+}
+
+.scrapbook-card:hover{
+
+  transform:translateY(-5px);
+}
+
+.scrapbook-card img{
+
+  width:100%;
+
+  height:280px;
+
+  object-fit:cover;
+}
+
+.scrapbook-card h3{
+
+  padding:15px 15px 5px;
+}
+
+.scrapbook-card p{
+
+  padding:0 15px 15px;
+}
+
+.video-memories{
+
+  margin-bottom:30px;
+}
+
+.video-memories video{
+
+  width:100%;
+
+  margin-top:20px;
+
+  border-radius:20px;
+}
+
+.memory-timeline{
+
+  margin-bottom:30px;
+}
+
+.timeline-item{
+
+  display:flex;
+
+  gap:20px;
+
+  padding:15px 0;
+
+  border-bottom:1px solid #dbe7dd;
+}
+
+.timeline-item span{
+
+  font-weight:bold;
+
+  color:#496151;
+
+  min-width:70px;
+}
+
+/* ========================= */
 /* CATS PAGE */
 /* ========================= */
 
@@ -893,4 +1040,214 @@ button:hover {
     font-size:2.3rem;
   }
 
+}
+
+/* ========================= */
+/* ADDIEPEDIA */
+/* ========================= */
+
+.addiepedia-header{
+
+  text-align:center;
+
+  margin-bottom:35px;
+}
+
+.addiepedia-header h1{
+
+  font-size:3rem;
+
+  color:#496151;
+}
+
+.addie-infobox{
+
+  display:grid;
+
+  grid-template-columns:250px 1fr;
+
+  gap:25px;
+
+  margin-bottom:25px;
+}
+
+.addie-photo img{
+
+  width:100%;
+
+  border-radius:20px;
+
+  object-fit:cover;
+}
+
+.wiki-list{
+
+  padding-left:25px;
+
+  line-height:2;
+}
+
+.addie-generator{
+
+  text-align:center;
+}
+
+#addieFact{
+
+  margin:20px 0;
+
+  font-size:1.1rem;
+}
+
+/* ========================= */
+/* LATE NIGHT THOUGHTS */
+/* ========================= */
+
+.thoughts-header{
+
+  text-align:center;
+
+  margin-bottom:35px;
+}
+
+.thought-entry textarea{
+
+  width:100%;
+
+  height:180px;
+
+  padding:20px;
+
+  border-radius:20px;
+
+  border:1px solid #d5e4d7;
+
+  resize:none;
+
+  margin-bottom:15px;
+}
+
+.thought-feed{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:20px;
+
+  margin-top:25px;
+}
+
+.thought-card{
+
+  background:#edf7ef;
+
+  padding:20px;
+
+  border-radius:20px;
+}
+
+.thought-date{
+
+  color:#7c9482;
+
+  font-size:.9rem;
+
+  margin-bottom:10px;
+}
+
+/* ========================= */
+/* FUTURE US */
+/* ========================= */
+
+.future-header{
+
+  text-align:center;
+
+  margin-bottom:35px;
+}
+
+.future-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(250px,1fr));
+
+  gap:20px;
+
+  margin-bottom:25px;
+}
+
+.calendar-card{
+
+  margin-top:25px;
+}
+
+.event{
+
+  background:#edf7ef;
+
+  padding:15px;
+
+  border-radius:15px;
+
+  margin-top:10px;
+}
+
+/* ========================= */
+/* BESTIE AWARDS */
+/* ========================= */
+
+.awards-header{
+
+  text-align:center;
+
+  margin-bottom:35px;
+}
+
+.award-year{
+
+  text-align:center;
+
+  margin-bottom:25px;
+
+  color:#496151;
+}
+
+.awards-grid{
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(250px,1fr));
+
+  gap:20px;
+}
+
+.award-card{
+
+  background:white;
+
+  border:1px solid #d5e4d7;
+
+  border-radius:24px;
+
+  padding:25px;
+
+  text-align:center;
+
+  transition:.3s;
+}
+
+.award-card:hover{
+
+  transform:translateY(-5px);
+}
+
+.award-icon{
+
+  font-size:3rem;
+
+  margin-bottom:15px;
 }
