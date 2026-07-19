@@ -29,63 +29,102 @@ function playAwardsApplause() {
     audioContext.resume();
   }
 
-  const sampleRate = audioContext.sampleRate;
-  const duration = 1.1;
-  const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
-  const data = buffer.getChannelData(0);
+  const currentTime = audioContext.currentTime;
 
-  for (let index = 0; index < data.length; index++) {
-    data[index] = (Math.random() * 2 - 1) * 0.9;
+  function createNoiseBuffer(duration) {
+    const sampleRate = audioContext.sampleRate;
+    const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
+    const data = buffer.getChannelData(0);
+
+    for (let index = 0; index < data.length; index++) {
+      data[index] = (Math.random() * 2 - 1) * 0.9;
+    }
+
+    return buffer;
   }
 
-  const noise = audioContext.createBufferSource();
-  noise.buffer = buffer;
-
-  const bandPass = audioContext.createBiquadFilter();
-  bandPass.type = "bandpass";
-  bandPass.frequency.value = 1800;
-  bandPass.Q.value = 0.8;
-
-  const highPass = audioContext.createBiquadFilter();
-  highPass.type = "highpass";
-  highPass.frequency.value = 900;
-
-  const gain = audioContext.createGain();
-  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.18, audioContext.currentTime + 0.03);
-  gain.gain.exponentialRampToValueAtTime(0.09, audioContext.currentTime + 0.18);
-  gain.gain.exponentialRampToValueAtTime(0.15, audioContext.currentTime + 0.32);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + duration);
-
-  noise.connect(bandPass);
-  bandPass.connect(highPass);
-  highPass.connect(gain);
-  gain.connect(audioContext.destination);
-
-  noise.start();
-  noise.stop(audioContext.currentTime + duration);
-
-  [0.08, 0.18, 0.29, 0.42, 0.56, 0.71, 0.86].forEach(offset => {
+  function scheduleClap(atTime, strength = 0.14) {
     const clap = audioContext.createBufferSource();
-    clap.buffer = buffer;
+    clap.buffer = createNoiseBuffer(0.18);
 
     const clapFilter = audioContext.createBiquadFilter();
     clapFilter.type = "bandpass";
-    clapFilter.frequency.value = 2200 + Math.random() * 700;
-    clapFilter.Q.value = 1.1;
+    clapFilter.frequency.value = 2400 + Math.random() * 900;
+    clapFilter.Q.value = 1.2;
 
     const clapGain = audioContext.createGain();
-    clapGain.gain.setValueAtTime(0.0001, audioContext.currentTime + offset);
-    clapGain.gain.exponentialRampToValueAtTime(0.10 + Math.random() * 0.08, audioContext.currentTime + offset + 0.012);
-    clapGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + offset + 0.09);
+    clapGain.gain.setValueAtTime(0.0001, atTime);
+    clapGain.gain.exponentialRampToValueAtTime(strength + Math.random() * 0.08, atTime + 0.01);
+    clapGain.gain.exponentialRampToValueAtTime(0.0001, atTime + 0.085);
 
     clap.connect(clapFilter);
     clapFilter.connect(clapGain);
     clapGain.connect(audioContext.destination);
 
-    clap.start(audioContext.currentTime + offset);
-    clap.stop(audioContext.currentTime + offset + 0.1);
-  });
+    clap.start(atTime);
+    clap.stop(atTime + 0.12);
+  }
+
+  function scheduleCheer(atTime, duration, strength = 0.08) {
+    const cheer = audioContext.createBufferSource();
+    cheer.buffer = createNoiseBuffer(duration);
+
+    const cheerFilter = audioContext.createBiquadFilter();
+    cheerFilter.type = "bandpass";
+    cheerFilter.frequency.value = 1500;
+    cheerFilter.Q.value = 0.9;
+
+    const cheerGain = audioContext.createGain();
+    cheerGain.gain.setValueAtTime(0.0001, atTime);
+    cheerGain.gain.exponentialRampToValueAtTime(strength, atTime + 0.08);
+    cheerGain.gain.exponentialRampToValueAtTime(strength * 0.8, atTime + duration * 0.6);
+    cheerGain.gain.exponentialRampToValueAtTime(0.0001, atTime + duration);
+
+    cheer.connect(cheerFilter);
+    cheerFilter.connect(cheerGain);
+    cheerGain.connect(audioContext.destination);
+
+    cheer.start(atTime);
+    cheer.stop(atTime + duration);
+  }
+
+  function scheduleWoo(atTime, duration, startFrequency, endFrequency, gainValue) {
+    const wooOscillator = audioContext.createOscillator();
+    const wooGain = audioContext.createGain();
+    const wooFilter = audioContext.createBiquadFilter();
+
+    wooOscillator.type = "sawtooth";
+    wooOscillator.frequency.setValueAtTime(startFrequency, atTime);
+    wooOscillator.frequency.exponentialRampToValueAtTime(endFrequency, atTime + duration);
+
+    wooFilter.type = "lowpass";
+    wooFilter.frequency.value = 1300;
+    wooFilter.Q.value = 0.7;
+
+    wooGain.gain.setValueAtTime(0.0001, atTime);
+    wooGain.gain.exponentialRampToValueAtTime(gainValue, atTime + 0.04);
+    wooGain.gain.exponentialRampToValueAtTime(0.0001, atTime + duration);
+
+    wooOscillator.connect(wooFilter);
+    wooFilter.connect(wooGain);
+    wooGain.connect(audioContext.destination);
+
+    wooOscillator.start(atTime);
+    wooOscillator.stop(atTime + duration + 0.05);
+  }
+
+  scheduleCheer(currentTime, 1.55, 0.09);
+  scheduleClap(currentTime + 0.02, 0.18);
+  scheduleClap(currentTime + 0.14, 0.16);
+  scheduleClap(currentTime + 0.27, 0.18);
+  scheduleClap(currentTime + 0.39, 0.17);
+  scheduleClap(currentTime + 0.53, 0.16);
+  scheduleClap(currentTime + 0.67, 0.18);
+  scheduleClap(currentTime + 0.81, 0.15);
+  scheduleClap(currentTime + 0.96, 0.17);
+  scheduleWoo(currentTime + 0.22, 0.55, 220, 330, 0.08);
+  scheduleWoo(currentTime + 0.74, 0.48, 260, 392, 0.07);
+  scheduleWoo(currentTime + 1.02, 0.36, 196, 294, 0.06);
 }
 
 tabButtons.forEach(button => {
