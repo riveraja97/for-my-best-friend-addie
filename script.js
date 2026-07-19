@@ -200,58 +200,16 @@ addTaskBtn.addEventListener("click", () => {
   if (taskInput.value === "") return;
 
   const li =
-  document.createElement("li");
+    document.createElement("li");
 
-li.textContent =
-  "☐ " + taskInput.value;
+  li.textContent =
+    "☐ " + taskInput.value;
 
-  /* Existing Tasks */
+  taskList.appendChild(li);
 
-document
-.querySelectorAll("#taskList li")
-.forEach(task=>{
-
-    task.addEventListener("click",()=>{
-
-        task.classList.toggle("completed");
-
-        if(task.classList.contains("completed")){
-
-            task.textContent =
-            task.textContent.replace("☐","☑");
-
-        }else{
-
-            task.textContent =
-            task.textContent.replace("☑","☐");
-
-        }
-
-    });
+  taskInput.value = "";
 
 });
-
-/* Click to Complete */
-
-li.addEventListener("click",()=>{
-
-    li.classList.toggle("completed");
-
-    if(li.classList.contains("completed")){
-
-        li.textContent =
-        li.textContent.replace("☐","☑");
-
-    }else{
-
-        li.textContent =
-        li.textContent.replace("☑","☐");
-
-    }
-
-});
-
-taskList.appendChild(li);
 
 
 /* QUOTES */
