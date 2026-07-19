@@ -200,16 +200,32 @@ addTaskBtn.addEventListener("click", () => {
   if (taskInput.value === "") return;
 
   const li =
-    document.createElement("li");
+  document.createElement("li");
 
-  li.textContent =
-    "☐ " + taskInput.value;
+li.textContent =
+  "☐ " + taskInput.value;
 
-  taskList.appendChild(li);
+/* Click to Complete */
 
-  taskInput.value = "";
+li.addEventListener("click",()=>{
+
+    li.classList.toggle("completed");
+
+    if(li.classList.contains("completed")){
+
+        li.textContent =
+        li.textContent.replace("☐","☑");
+
+    }else{
+
+        li.textContent =
+        li.textContent.replace("☑","☐");
+
+    }
 
 });
+
+taskList.appendChild(li);
 
 
 /* QUOTES */

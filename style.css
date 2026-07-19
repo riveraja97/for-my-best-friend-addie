@@ -381,6 +381,38 @@ html[data-theme="night"] .theme-toggle:hover {
   margin-bottom: 10px;
 }
 
+/* Clickable Tasks */
+
+#taskList li{
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#taskList li:hover{
+
+    background:#dff1e3;
+
+    transform:translateX(5px);
+
+}
+
+/* Completed Task */
+
+#taskList li.completed{
+
+    text-decoration:line-through;
+
+    opacity:.55;
+
+    color:#7b8b80;
+
+    background:#dce9df;
+
+}
+
 /* PLAYLIST */
 
 .playlist-item {
