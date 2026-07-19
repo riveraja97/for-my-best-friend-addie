@@ -1041,3 +1041,224 @@ document
 
 renderCalendar();
 renderEvents();
+
+/* ========================= */
+/* TALK TO CATBOT */
+/* ========================= */
+
+
+const chatInput =
+document.getElementById("chatInput");
+
+
+const sendChat =
+document.getElementById("sendChat");
+
+
+const chatMessages =
+document.getElementById("chatMessages");
+
+
+const avatar =
+document.getElementById("jaelynAvatar");
+
+
+
+function addMessage(text,type){
+
+
+const div =
+document.createElement("div");
+
+
+div.className =
+type;
+
+
+div.textContent =
+text;
+
+
+chatMessages.appendChild(div);
+
+
+chatMessages.scrollTop =
+chatMessages.scrollHeight;
+
+
+}
+
+
+
+
+async function sendMessage(){
+
+
+const message =
+chatInput.value.trim();
+
+
+
+if(!message)
+return;
+
+
+
+addMessage(
+message,
+"user-message"
+);
+
+
+
+chatInput.value="";
+
+
+
+startTalking();
+
+
+
+const response =
+await fetch(
+
+"addie-chatbot.jaelyn-jacinto97.workers.dev",
+{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:JSON.stringify({
+
+message
+
+})
+
+}
+
+);
+
+
+
+const data =
+await response.json();
+
+
+
+stopTalking();
+
+
+
+addMessage(
+data.reply,
+"bot-message"
+);
+
+
+
+speak(data.reply);
+
+
+}
+
+
+
+sendChat.onclick =
+sendMessage;
+
+
+
+chatInput.addEventListener(
+"keypress",
+(e)=>{
+
+if(e.key==="Enter")
+sendMessage();
+
+});
+
+/* Mouth movement animation for avatar */
+
+let talkingInterval;
+
+
+function startTalking(){
+
+
+let mouths=[
+
+"images/jaelyn-mouth1.png",
+
+"images/jaelyn-mouth2.png",
+
+"images/jaelyn-mouth3.png"
+
+];
+
+
+let i=0;
+
+
+talkingInterval=setInterval(()=>{
+
+
+avatar.src=
+mouths[i];
+
+
+i++;
+
+if(i>=mouths.length)
+i=0;
+
+
+},150);
+
+
+}
+
+
+
+function stopTalking(){
+
+
+clearInterval(talkingInterval);
+
+
+avatar.src=
+"images/jaelyn-idle.png";
+
+
+}
+/* ---- Voice for Catbot---- */
+
+function speak(text){
+
+
+const speech =
+new SpeechSynthesisUtterance(text);
+
+
+speech.rate=.95;
+
+speech.pitch=1.1;
+
+
+speech.onstart =
+startTalking;
+
+
+speech.onend =
+stopTalking;
+
+
+
+speechSynthesis.speak(speech);
+
+
+}
