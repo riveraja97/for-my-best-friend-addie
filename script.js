@@ -205,6 +205,32 @@ addTaskBtn.addEventListener("click", () => {
 li.textContent =
   "☐ " + taskInput.value;
 
+  /* Existing Tasks */
+
+document
+.querySelectorAll("#taskList li")
+.forEach(task=>{
+
+    task.addEventListener("click",()=>{
+
+        task.classList.toggle("completed");
+
+        if(task.classList.contains("completed")){
+
+            task.textContent =
+            task.textContent.replace("☐","☑");
+
+        }else{
+
+            task.textContent =
+            task.textContent.replace("☑","☐");
+
+        }
+
+    });
+
+});
+
 /* Click to Complete */
 
 li.addEventListener("click",()=>{
