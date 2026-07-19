@@ -4,6 +4,14 @@
   box-sizing: border-box;
 }
 
+html {
+  color-scheme: light;
+}
+
+html[data-theme="night"] {
+  color-scheme: dark;
+}
+
 body {
   font-family: 'Quicksand', sans-serif;
 
@@ -212,6 +220,29 @@ button:hover {
   background: #c8dfce;
 
   transform: translateY(-2px);
+}
+
+.theme-toggle {
+  position: fixed;
+
+  right: 24px;
+  bottom: 24px;
+
+  z-index: 1200;
+
+  border-radius: 999px;
+
+  box-shadow: 0 12px 30px rgba(71, 96, 77, 0.18);
+}
+
+html[data-theme="night"] .theme-toggle {
+  background: #86b794;
+
+  color: #132018;
+}
+
+html[data-theme="night"] .theme-toggle:hover {
+  background: #98c8a5;
 }
 
 /* NEWS GRID */
@@ -1402,4 +1433,140 @@ button:hover {
   font-size:3rem;
 
   margin-bottom:15px;
+}
+
+/* NIGHT MODE */
+
+html[data-theme="night"] body {
+  background: #111814;
+
+  color: #e1ede4;
+}
+
+html[data-theme="night"] .navbar {
+  background: rgba(16, 24, 18, 0.9);
+
+  border-bottom-color: #233226;
+}
+
+html[data-theme="night"] .logo,
+html[data-theme="night"] .tab-btn,
+html[data-theme="night"] .award-year,
+html[data-theme="night"] .calendar-days,
+html[data-theme="night"] .post-content h2,
+html[data-theme="night"] .article-full h2,
+html[data-theme="night"] .featured-text h1,
+html[data-theme="night"] .study-header h1,
+html[data-theme="night"] .memory-header h1,
+html[data-theme="night"] .cats-header h1,
+html[data-theme="night"] .thoughts-header,
+html[data-theme="night"] .future-header,
+html[data-theme="night"] .tumblr-header h1 {
+  color: #e8f5ea;
+}
+
+html[data-theme="night"] .tab-btn:hover,
+html[data-theme="night"] .breaking-news,
+html[data-theme="night"] .post-date,
+html[data-theme="night"] .tumblr-header p,
+html[data-theme="night"] .memory-header p,
+html[data-theme="night"] .cats-header p,
+html[data-theme="night"] .thought-date,
+html[data-theme="night"] .tags,
+html[data-theme="night"] .calendar-days,
+html[data-theme="night"] .award-year {
+  color: #a8c0ae;
+}
+
+html[data-theme="night"] .tab-btn.active {
+  border-bottom-color: #a8c0ae;
+}
+
+html[data-theme="night"] button {
+  background: #274031;
+
+  color: #e8f5ea;
+}
+
+html[data-theme="night"] button:hover {
+  background: #345443;
+}
+
+html[data-theme="night"] .featured-text,
+html[data-theme="night"] .news-card,
+html[data-theme="night"] .live-updates,
+html[data-theme="night"] .placeholder-section,
+html[data-theme="night"] .card,
+html[data-theme="night"] .timer-circle,
+html[data-theme="night"] .quote-box,
+html[data-theme="night"] .blog-post,
+html[data-theme="night"] .post-image,
+html[data-theme="night"] .addie-photo,
+html[data-theme="night"] .thought-card,
+html[data-theme="night"] .calendar-day,
+html[data-theme="night"] .event-item,
+html[data-theme="night"] .award-card,
+html[data-theme="night"] .memory-story,
+html[data-theme="night"] .memory-timeline,
+html[data-theme="night"] .cat-card,
+html[data-theme="night"] .cat-report,
+html[data-theme="night"] .cat-fortune,
+html[data-theme="night"] .cat-advice-box,
+html[data-theme="night"] .cat-wisdom-box,
+html[data-theme="night"] .speech-bubble,
+html[data-theme="night"] .addie-infobox,
+html[data-theme="night"] .todo-input input,
+html[data-theme="night"] #taskList li,
+html[data-theme="night"] .playlist-item,
+html[data-theme="night"] .notes-card textarea {
+  background: #18231b;
+
+  border-color: #2a3c2f;
+}
+
+html[data-theme="night"] .featured-text,
+html[data-theme="night"] .news-card,
+html[data-theme="night"] .live-updates,
+html[data-theme="night"] .placeholder-section,
+html[data-theme="night"] .card,
+html[data-theme="night"] .blog-post,
+html[data-theme="night"] .award-card,
+html[data-theme="night"] .addie-infobox,
+html[data-theme="night"] .memory-story,
+html[data-theme="night"] .memory-timeline,
+html[data-theme="night"] .cat-card,
+html[data-theme="night"] .cat-report,
+html[data-theme="night"] .cat-fortune,
+html[data-theme="night"] .cat-advice-box,
+html[data-theme="night"] .cat-wisdom-box,
+html[data-theme="night"] .playlist-item,
+html[data-theme="night"] .event-item,
+html[data-theme="night"] #taskList li,
+html[data-theme="night"] .thought-card,
+html[data-theme="night"] .quote-box {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+html[data-theme="night"] .featured-image {
+  background: linear-gradient(135deg, #1f3125, #17261d);
+}
+
+html[data-theme="night"] .timer-circle {
+  border-color: #3a5743;
+
+  background: #142017;
+}
+
+html[data-theme="night"] .playlist-cover,
+html[data-theme="night"] .speech-bubble {
+  background: #223226;
+}
+
+html[data-theme="night"] .calendar-day:hover,
+html[data-theme="night"] .award-card:hover {
+  background: #203126;
+}
+
+html[data-theme="night"] .has-event {
+  border-color: #7aa788;
 }

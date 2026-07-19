@@ -16,6 +16,18 @@
     rel="stylesheet"
   >
 
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("theme-mode") === "night") {
+          document.documentElement.dataset.theme = "night";
+        }
+      } catch (error) {
+        /* Ignore storage failures. */
+      }
+    })();
+  </script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
@@ -95,6 +107,10 @@
     </ul>
 
   </nav>
+
+  <button class="theme-toggle" type="button" aria-pressed="false">
+    🌙 
+  </button>
 
   <!-- MAIN CONTAINER -->
   <main class="container">

@@ -36,6 +36,42 @@ tabButtons.forEach(button => {
 });
 
 
+/* DAY AND NIGHT MODE */
+
+const themeToggle = document.querySelector(".theme-toggle");
+const themeRoot = document.documentElement;
+
+function getTheme() {
+  return themeRoot.dataset.theme === "night" ? "night" : "day";
+}
+
+function applyTheme(theme) {
+  if (theme === "night") {
+    themeRoot.dataset.theme = "night";
+    themeToggle.textContent = "☀️ Day";
+    themeToggle.setAttribute("aria-pressed", "true");
+  } else {
+    themeRoot.removeAttribute("data-theme");
+    themeToggle.textContent = "🌙 Night";
+    themeToggle.setAttribute("aria-pressed", "false");
+  }
+
+  try {
+    localStorage.setItem("theme-mode", theme);
+  } catch (error) {
+    /* Ignore storage failures. */
+  }
+}
+
+if (themeToggle) {
+  applyTheme(getTheme());
+
+  themeToggle.addEventListener("click", () => {
+    applyTheme(getTheme() === "night" ? "day" : "night");
+  });
+}
+
+
 /* EXPANDABLE NEWS ARTICLE */
 
 const readMoreBtn = document.querySelector(".read-more-btn");
