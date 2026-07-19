@@ -381,11 +381,6 @@ html[data-theme="night"] .theme-toggle:hover {
   margin-bottom: 10px;
 }
 
-#taskList li.completed {
-  background: #e0f0e3;
-  text-decoration: line-through;
-}
-
 /* PLAYLIST */
 
 .playlist-item {
