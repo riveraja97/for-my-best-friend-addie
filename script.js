@@ -6,6 +6,88 @@ const tabButtons =
 const tabContents =
   document.querySelectorAll(".tab-content");
 
+let applauseAudioContext = null;
+
+function getApplauseAudioContext() {
+  if (!applauseAudioContext) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioCtx) return null;
+
+    applauseAudioContext = new AudioCtx();
+  }
+
+  return applauseAudioContext;
+}
+
+function playAwardsApplause() {
+  const audioContext = getApplauseAudioContext();
+
+  if (!audioContext) return;
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  const sampleRate = audioContext.sampleRate;
+  const duration = 1.1;
+  const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
+  const data = buffer.getChannelData(0);
+
+  for (let index = 0; index < data.length; index++) {
+    data[index] = (Math.random() * 2 - 1) * 0.9;
+  }
+
+  const noise = audioContext.createBufferSource();
+  noise.buffer = buffer;
+
+  const bandPass = audioContext.createBiquadFilter();
+  bandPass.type = "bandpass";
+  bandPass.frequency.value = 1800;
+  bandPass.Q.value = 0.8;
+
+  const highPass = audioContext.createBiquadFilter();
+  highPass.type = "highpass";
+  highPass.frequency.value = 900;
+
+  const gain = audioContext.createGain();
+  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.18, audioContext.currentTime + 0.03);
+  gain.gain.exponentialRampToValueAtTime(0.09, audioContext.currentTime + 0.18);
+  gain.gain.exponentialRampToValueAtTime(0.15, audioContext.currentTime + 0.32);
+  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + duration);
+
+  noise.connect(bandPass);
+  bandPass.connect(highPass);
+  highPass.connect(gain);
+  gain.connect(audioContext.destination);
+
+  noise.start();
+  noise.stop(audioContext.currentTime + duration);
+
+  [0.08, 0.18, 0.29, 0.42, 0.56, 0.71, 0.86].forEach(offset => {
+    const clap = audioContext.createBufferSource();
+    clap.buffer = buffer;
+
+    const clapFilter = audioContext.createBiquadFilter();
+    clapFilter.type = "bandpass";
+    clapFilter.frequency.value = 2200 + Math.random() * 700;
+    clapFilter.Q.value = 1.1;
+
+    const clapGain = audioContext.createGain();
+    clapGain.gain.setValueAtTime(0.0001, audioContext.currentTime + offset);
+    clapGain.gain.exponentialRampToValueAtTime(0.10 + Math.random() * 0.08, audioContext.currentTime + offset + 0.012);
+    clapGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + offset + 0.09);
+
+    clap.connect(clapFilter);
+    clapFilter.connect(clapGain);
+    clapGain.connect(audioContext.destination);
+
+    clap.start(audioContext.currentTime + offset);
+    clap.stop(audioContext.currentTime + offset + 0.1);
+  });
+}
+
 tabButtons.forEach(button => {
 
   button.addEventListener("click", () => {
@@ -30,6 +112,10 @@ tabButtons.forEach(button => {
     document
       .getElementById(target)
       .classList.add("active");
+
+    if (target === "awards") {
+      playAwardsApplause();
+    }
 
   });
 
