@@ -8,123 +8,15 @@ const tabContents =
 
 let applauseAudioContext = null;
 
-function getApplauseAudioContext() {
-  if (!applauseAudioContext) {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-
-    if (!AudioCtx) return null;
-
-    applauseAudioContext = new AudioCtx();
-  }
-
-  return applauseAudioContext;
-}
-
 function playAwardsApplause() {
-  const audioContext = getApplauseAudioContext();
+  const awardsSound = new Audio("Audio/awardscelebrate.mp3");
 
-  if (!audioContext) return;
+  awardsSound.volume = 1;
+  awardsSound.currentTime = 0;
 
-  if (audioContext.state === "suspended") {
-    audioContext.resume();
-  }
-
-  const currentTime = audioContext.currentTime;
-
-  function createNoiseBuffer(duration) {
-    const sampleRate = audioContext.sampleRate;
-    const buffer = audioContext.createBuffer(1, sampleRate * duration, sampleRate);
-    const data = buffer.getChannelData(0);
-
-    for (let index = 0; index < data.length; index++) {
-      data[index] = (Math.random() * 2 - 1) * 0.9;
-    }
-
-    return buffer;
-  }
-
-  function scheduleClap(atTime, strength = 0.14) {
-    const clap = audioContext.createBufferSource();
-    clap.buffer = createNoiseBuffer(0.18);
-
-    const clapFilter = audioContext.createBiquadFilter();
-    clapFilter.type = "bandpass";
-    clapFilter.frequency.value = 2400 + Math.random() * 900;
-    clapFilter.Q.value = 1.2;
-
-    const clapGain = audioContext.createGain();
-    clapGain.gain.setValueAtTime(0.0001, atTime);
-    clapGain.gain.exponentialRampToValueAtTime(strength + Math.random() * 0.08, atTime + 0.01);
-    clapGain.gain.exponentialRampToValueAtTime(0.0001, atTime + 0.085);
-
-    clap.connect(clapFilter);
-    clapFilter.connect(clapGain);
-    clapGain.connect(audioContext.destination);
-
-    clap.start(atTime);
-    clap.stop(atTime + 0.12);
-  }
-
-  function scheduleCheer(atTime, duration, strength = 0.08) {
-    const cheer = audioContext.createBufferSource();
-    cheer.buffer = createNoiseBuffer(duration);
-
-    const cheerFilter = audioContext.createBiquadFilter();
-    cheerFilter.type = "bandpass";
-    cheerFilter.frequency.value = 1500;
-    cheerFilter.Q.value = 0.9;
-
-    const cheerGain = audioContext.createGain();
-    cheerGain.gain.setValueAtTime(0.0001, atTime);
-    cheerGain.gain.exponentialRampToValueAtTime(strength, atTime + 0.08);
-    cheerGain.gain.exponentialRampToValueAtTime(strength * 0.8, atTime + duration * 0.6);
-    cheerGain.gain.exponentialRampToValueAtTime(0.0001, atTime + duration);
-
-    cheer.connect(cheerFilter);
-    cheerFilter.connect(cheerGain);
-    cheerGain.connect(audioContext.destination);
-
-    cheer.start(atTime);
-    cheer.stop(atTime + duration);
-  }
-
-  function scheduleWoo(atTime, duration, startFrequency, endFrequency, gainValue) {
-    const wooOscillator = audioContext.createOscillator();
-    const wooGain = audioContext.createGain();
-    const wooFilter = audioContext.createBiquadFilter();
-
-    wooOscillator.type = "sawtooth";
-    wooOscillator.frequency.setValueAtTime(startFrequency, atTime);
-    wooOscillator.frequency.exponentialRampToValueAtTime(endFrequency, atTime + duration);
-
-    wooFilter.type = "lowpass";
-    wooFilter.frequency.value = 1300;
-    wooFilter.Q.value = 0.7;
-
-    wooGain.gain.setValueAtTime(0.0001, atTime);
-    wooGain.gain.exponentialRampToValueAtTime(gainValue, atTime + 0.04);
-    wooGain.gain.exponentialRampToValueAtTime(0.0001, atTime + duration);
-
-    wooOscillator.connect(wooFilter);
-    wooFilter.connect(wooGain);
-    wooGain.connect(audioContext.destination);
-
-    wooOscillator.start(atTime);
-    wooOscillator.stop(atTime + duration + 0.05);
-  }
-
-  scheduleCheer(currentTime, 1.55, 0.09);
-  scheduleClap(currentTime + 0.02, 0.18);
-  scheduleClap(currentTime + 0.14, 0.16);
-  scheduleClap(currentTime + 0.27, 0.18);
-  scheduleClap(currentTime + 0.39, 0.17);
-  scheduleClap(currentTime + 0.53, 0.16);
-  scheduleClap(currentTime + 0.67, 0.18);
-  scheduleClap(currentTime + 0.81, 0.15);
-  scheduleClap(currentTime + 0.96, 0.17);
-  scheduleWoo(currentTime + 0.22, 0.55, 220, 330, 0.08);
-  scheduleWoo(currentTime + 0.74, 0.48, 260, 392, 0.07);
-  scheduleWoo(currentTime + 1.02, 0.36, 196, 294, 0.06);
+  awardsSound.play().catch(() => {
+    /* Ignore autoplay or missing-file failures. */
+  });
 }
 
 tabButtons.forEach(button => {
