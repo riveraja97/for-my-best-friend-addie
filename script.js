@@ -1061,6 +1061,24 @@ document.getElementById("chatMessages");
 
 const avatar =
 document.getElementById("jaelynAvatar");
+const avatarStatus =
+document.getElementById("avatarStatus");
+
+const avatarPhrases = [
+
+"waiting for Addie ✨",
+
+"thinking about snacks and playlists 🎧",
+
+"here for emotional support 💚",
+
+"being cute, obviously 🐾",
+
+"ready to help you study 📚"
+
+];
+
+let avatarPhraseIndex = 0;
 
 
 
@@ -1093,6 +1111,22 @@ chatMessages.scrollHeight;
 
 async function sendMessage(){
 
+function nudgeAvatar(){
+
+if(!avatar || !avatarStatus) return;
+
+avatarPhraseIndex =
+(avatarPhraseIndex + 1) % avatarPhrases.length;
+
+avatarStatus.textContent = avatarPhrases[avatarPhraseIndex];
+
+avatar.classList.remove("avatar-nudge");
+
+void avatar.offsetWidth;
+
+avatar.classList.add("avatar-nudge");
+
+}
 
 const message =
 chatInput.value.trim();
@@ -1170,6 +1204,20 @@ speak(data.reply);
 
 sendChat.onclick =
 sendMessage;
+
+avatar?.addEventListener("click", nudgeAvatar);
+
+avatar?.addEventListener("keydown", event => {
+
+if(event.key === "Enter" || event.key === " "){
+
+event.preventDefault();
+
+nudgeAvatar();
+
+}
+
+});
 
 
 
