@@ -174,14 +174,19 @@ body {
   align-items: center;
 
   overflow: hidden;
-  min-height: 320px;
+  min-height: 250px;
+  max-height: 360px;
+  padding: 16px;
 }
 
 .featured-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
   display: block;
+  border-radius: 18px;
 }
 
 /* BUTTONS */
