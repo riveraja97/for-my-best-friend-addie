@@ -222,6 +222,68 @@ if (taskList) {
 }
 
 
+/* MOOD CHECK-IN */
+
+const moodCard = document.querySelector(".mood-card");
+
+function launchMoodBurst(emoji) {
+  if (!moodCard) return;
+
+  const burstLayer = moodCard.querySelector(".mood-burst-layer");
+
+  if (!burstLayer) return;
+
+  const cardRect = moodCard.getBoundingClientRect();
+  const burstCount = 14;
+
+  for (let index = 0; index < burstCount; index++) {
+    const burst = document.createElement("span");
+
+    const x = 30 + Math.random() * Math.max(cardRect.width - 60, 120);
+    const y = 60 + Math.random() * Math.max(cardRect.height - 110, 120);
+    const dx = `${(Math.random() - 0.5) * 220}px`;
+    const dy = `${-60 - Math.random() * 160}px`;
+    const size = `${1.1 + Math.random() * 1.1}rem`;
+    const rotate = `${(Math.random() - 0.5) * 80}deg`;
+
+    burst.className = "mood-burst";
+    burst.textContent = emoji;
+    burst.style.setProperty("--x", `${x}px`);
+    burst.style.setProperty("--y", `${y}px`);
+    burst.style.setProperty("--dx", dx);
+    burst.style.setProperty("--dy", dy);
+    burst.style.setProperty("--size", size);
+    burst.style.setProperty("--rotate", rotate);
+
+    burstLayer.appendChild(burst);
+
+    window.setTimeout(() => {
+      burst.remove();
+    }, 950);
+  }
+
+  document.dispatchEvent(
+    new CustomEvent("mood-emoji:selected", {
+      detail: { emoji }
+    })
+  );
+
+  if (typeof window.playMoodSound === "function") {
+    window.playMoodSound(emoji);
+  }
+}
+
+if (moodCard) {
+  moodCard.addEventListener("click", event => {
+    const moodButton = event.target.closest("button[data-emoji]");
+
+    if (!moodButton || !moodCard.contains(moodButton)) return;
+
+    launchMoodBurst(moodButton.dataset.emoji || moodButton.textContent.trim());
+  });
+}
+
+
 /* QUOTES */
 
 const quotes = [

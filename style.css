@@ -425,11 +425,63 @@ html[data-theme="night"] .theme-toggle:hover {
 
 /* MOOD */
 
+.mood-card {
+  position: relative;
+
+  overflow: hidden;
+}
+
 .mood-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
   gap: 12px;
+}
+
+.mood-grid button {
+  font-size: 1.45rem;
+
+  min-height: 54px;
+
+  border-radius: 16px;
+}
+
+.mood-burst-layer {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+}
+
+.mood-burst {
+  position: absolute;
+
+  left: var(--x);
+  top: var(--y);
+
+  font-size: var(--size);
+
+  transform: translate(-50%, -50%) scale(0.4);
+
+  animation: moodBurst 900ms ease-out forwards;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12));
+}
+
+@keyframes moodBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4) rotate(0deg);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(var(--rotate));
+  }
 }
 
 /* NOTES */
