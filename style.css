@@ -1839,3 +1839,37 @@ html[data-theme="night"] .award-card:hover {
 html[data-theme="night"] .has-event {
   border-color: #7aa788;
 }
+
+html[data-theme="night"] .jaelyn-header p,
+html[data-theme="night"] #avatarStatus,
+html[data-theme="night"] .bot-message,
+html[data-theme="night"] .user-message,
+html[data-theme="night"] #chatInput {
+  color: #e8f5ea;
+}
+
+html[data-theme="night"] .chatbot-container {
+  background: #18231b;
+  border-color: #2a3c2f;
+}
+
+html[data-theme="night"] .chat-window {
+  background: #101912;
+}
+
+html[data-theme="night"] .bot-message {
+  background: #233528;
+}
+
+html[data-theme="night"] .user-message {
+  background: #1d2d22;
+}
+
+html[data-theme="night"] #chatInput {
+  background: #142017;
+  border-color: #2a3c2f;
+}
+
+html[data-theme="night"] #chatInput::placeholder {
+  color: #9cb7a3;
+}
