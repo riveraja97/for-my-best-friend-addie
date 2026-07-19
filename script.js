@@ -226,6 +226,61 @@ if (taskList) {
 
 const moodCard = document.querySelector(".mood-card");
 
+const moodSoundMap = {
+  "😊": [523.25, 659.25],
+  "😴": [261.63, 196.0],
+  "⭐": [783.99, 987.77],
+  "☁": [392.0, 329.63],
+  "😵": [622.25, 466.16],
+  "💻": [440.0, 554.37]
+};
+
+let moodAudioContext = null;
+
+function getMoodAudioContext() {
+  if (!moodAudioContext) {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+
+    if (!AudioCtx) return null;
+
+    moodAudioContext = new AudioCtx();
+  }
+
+  return moodAudioContext;
+}
+
+window.playMoodSound = function playMoodSound(emoji) {
+  const audioContext = getMoodAudioContext();
+
+  if (!audioContext) return;
+
+  if (audioContext.state === "suspended") {
+    audioContext.resume();
+  }
+
+  const now = audioContext.currentTime;
+  const notes = moodSoundMap[emoji] || [392.0, 523.25];
+
+  notes.forEach((frequency, index) => {
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const start = now + index * 0.08;
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(frequency, start);
+
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.09, start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.18);
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start(start);
+    oscillator.stop(start + 0.2);
+  });
+};
+
 function launchMoodBurst(emoji) {
   if (!moodCard) return;
 
