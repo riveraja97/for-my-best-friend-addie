@@ -211,6 +211,16 @@ addTaskBtn.addEventListener("click", () => {
 
 });
 
+if (taskList) {
+  taskList.addEventListener("click", event => {
+    const taskItem = event.target.closest("li");
+
+    if (!taskItem || !taskList.contains(taskItem)) return;
+
+    taskItem.classList.toggle("completed");
+  });
+}
+
 
 /* QUOTES */
 
