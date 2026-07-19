@@ -36,6 +36,20 @@ tabButtons.forEach(button => {
 });
 
 
+/* EXPANDABLE NEWS ARTICLE */
+
+const readMoreBtn = document.querySelector(".read-more-btn");
+const articleFull = document.getElementById("articleFull");
+
+if (readMoreBtn && articleFull) {
+  readMoreBtn.addEventListener("click", () => {
+    const isOpen = articleFull.classList.toggle("open");
+
+    readMoreBtn.textContent = isOpen ? "Show Less ←" : "Read More →";
+    readMoreBtn.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
 /* TIMER */
 
 let timeLeft = 25 * 60;

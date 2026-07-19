@@ -130,7 +130,34 @@ body {
 .article-description {
   line-height: 1.7;
 
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+}
+
+.read-more-btn {
+  margin-bottom: 14px;
+}
+
+.article-full {
+  display: none;
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: #f7fcf8;
+  border: 1px solid #dce9dc;
+  line-height: 1.7;
+}
+
+.article-full.open {
+  display: block;
+}
+
+.article-full h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #47604d;
+}
+
+.article-full p {
+  margin-bottom: 8px;
 }
 
 .featured-image {
