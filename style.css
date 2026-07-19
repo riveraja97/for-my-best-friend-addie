@@ -411,6 +411,41 @@ html[data-theme="night"] .theme-toggle:hover {
   background: #bdd8c2;
 }
 
+.play-button {
+  border: 0;
+  cursor: pointer;
+
+  margin-left: auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 999px;
+
+  background: #8bbf9a;
+  color: #ffffff;
+
+  text-decoration: none;
+  font-size: 1rem;
+  line-height: 1;
+
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.play-button:hover,
+.play-button:focus-visible {
+  transform: scale(1.06);
+  filter: brightness(0.95);
+}
+
+.playlist-widget {
+  margin-top: 14px;
+}
+
 /* QUOTE */
 
 .quote-box {

@@ -222,6 +222,28 @@ if (taskList) {
 }
 
 
+/* STUDY PLAYLIST WIDGET */
+
+const studyPlaylistToggle = document.getElementById("studyPlaylistToggle");
+const studyPlaylistWidget = document.getElementById("studyPlaylistWidget");
+
+if (studyPlaylistToggle && studyPlaylistWidget) {
+  studyPlaylistToggle.addEventListener("click", () => {
+    const shouldOpen = studyPlaylistWidget.hasAttribute("hidden");
+
+    if (shouldOpen) {
+      studyPlaylistWidget.removeAttribute("hidden");
+      studyPlaylistToggle.setAttribute("aria-expanded", "true");
+      studyPlaylistToggle.textContent = "✕";
+    } else {
+      studyPlaylistWidget.setAttribute("hidden", "");
+      studyPlaylistToggle.setAttribute("aria-expanded", "false");
+      studyPlaylistToggle.textContent = "▶";
+    }
+  });
+}
+
+
 /* MOOD CHECK-IN */
 
 const moodCard = document.querySelector(".mood-card");
