@@ -82,7 +82,7 @@
 
       <li>
         <button class="tab-btn" data-tab="future">
-          🔮
+          📅
         </button>
         </li>
       
@@ -100,7 +100,7 @@
   
 </li>
         <button class="tab-btn" data-tab="contact">
-          Catbot
+          🔮
         </button>
       </li>
 
@@ -1296,7 +1296,7 @@
 
   <div class="future-header">
 
-    <h1>🔮 Future Us</h1>
+    <h1>📅 Future Us</h1>
 
     <p>
       Adventures waiting to happen.
@@ -1996,88 +1996,169 @@
 
 
 <!-- ====================== -->
-<!-- TALK TO CATBOT -->
+<!-- MAGIC BESTIE 8 BALL -->
 <!-- ====================== -->
 
 <section id="contact" class="tab-content">
 
+  <div class="magic-header">
 
-<div class="jaelyn-header">
+    <p class="magic-kicker">✦ CONSULT THE ORACLE ✦</p>
 
-<h1>
-💚 Talk to Catbot
-</h1>
+    <h1>the magic bestie ball 🔮</h1>
 
-<p>
-Your digital bestie is always here.
-</p>
+    <p>
+      Ask a yes or no question, summon the universe,
+      and let the magic decide your fate.
+    </p>
 
-</div>
-
-
-
-<div class="chatbot-container">
+  </div>
 
 
-<!-- AVATAR -->
-
-<div class="avatar-area">
-
-<img 
-id="jaelynAvatar"
-tabindex="0"
-role="button"
-src="Avatar/catbot.png"
-alt="Jaelyn Avatar"
->
+  <div class="magic-container">
 
 
-<p id="avatarStatus">
-waiting for Addie ✨
-</p>
+    <!-- QUESTION AREA -->
+
+    <div class="magic-question-card">
+
+      <label for="magicQuestion">
+        what would you like to know? ✨
+      </label>
+
+      <input
+        type="text"
+        id="magicQuestion"
+        placeholder="Should I take a nap today?"
+        autocomplete="off"
+      >
+
+      <p class="question-hint">
+        Ask a yes or no question, then shake the ball.
+      </p>
+
+    </div>
 
 
-</div>
+    <!-- MAGIC BALL -->
+
+    <div
+      class="magic-ball-wrapper"
+      id="magicBall"
+      role="button"
+      tabindex="0"
+      aria-label="Shake the magic bestie ball"
+    >
+
+      <div class="magic-ball">
+
+        <!-- STARS -->
+
+        <span class="ball-star star-one">✦</span>
+        <span class="ball-star star-two">✧</span>
+        <span class="ball-star star-three">✦</span>
 
 
-<!-- CHAT -->
+        <!-- FACE WINDOW -->
 
-<div class="chat-window">
+        <div class="magic-face-window">
 
+          <!-- CHANGE THIS TO YOUR IMAGE -->
 
-<div id="chatMessages"
-class="chat-messages">
+          <img
+            id="magicFace"
+            src="images/Catbot.png"
+            alt="The Magic Bestie Oracle"
+          >
 
-
-<div class="bot-message">
-
-Hi Bestie 💚
-Ask me anything.
-
-</div>
+        </div>
 
 
-</div>
+        <!-- SHINE -->
+
+        <div class="ball-shine"></div>
+
+      </div>
+
+    </div>
 
 
+    <!-- ANSWER -->
 
-<div class="chat-input-area">
+    <div class="magic-answer-card">
 
+      <p class="answer-label">
+        ✦ THE MAGIC 8 BALL SAYS ✦
+      </p>
 
-<input
-id="chatInput"
-placeholder="Ask me anything..."
->
+      <p id="magicAnswer">
+        Ask your question and click the ball...
+      </p>
 
-
-<button id="sendChat">
-
-Send ✨
-
-</button>
+    </div>
 
 
-</div>
+    <!-- SHAKE BUTTON -->
+
+    <button
+      id="shakeBall"
+      class="shake-button"
+    >
+
+      ✨ Shake The Magic 8 Ball ✨
+
+    </button>
+
+
+    <!-- LITTLE INSTRUCTIONS -->
+
+    <p class="magic-footer">
+
+      powered by questionable cosmic energy,
+      bestie intuition, and a tiny bit of chaos 💚
+
+    </p>
+
+  </div>
+
+
+  <!-- MAGIC EXAMPLES -->
+
+  <div class="magic-examples">
+
+    <h2>questions the oracle enjoys 👀</h2>
+
+    <div class="example-grid">
+
+      <button class="example-question">
+        Should I take a nap?
+      </button>
+
+      <button class="example-question">
+        Does Cat love me?
+      </button>
+
+      <button class="example-question">
+        Should I text them?
+      </button>
+
+      <button class="example-question">
+        Should I study right now?
+      </button>
+
+      <button class="example-question">
+        Am I pretty?
+      </button>
+
+      <button class="example-question">
+        Should I get a sweet treat?
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 
 
 </div>
