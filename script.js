@@ -1060,270 +1060,516 @@ renderCalendar();
 renderEvents();
 
 /* ========================= */
-/* TALK TO CATBOT */
+/* MAGIC BESTIE 8 BALL */
+/* ========================= */
+
+const magicBall =
+  document.getElementById("magicBall");
+
+const shakeBall =
+  document.getElementById("shakeBall");
+
+const magicQuestion =
+  document.getElementById("magicQuestion");
+
+const magicAnswer =
+  document.getElementById("magicAnswer");
+
+const ballFace =
+  document.getElementById("magicFace");
+
+
+/* MAGIC RESPONSES */
+
+const magicResponses = [
+
+  "Yes. Absolutely. ✨",
+
+  "The universe says yes.",
+
+  "Without a doubt.",
+
+  "Signs point to yes.",
+
+  "Definitely bestie.",
+
+  "You already know the answer 👀",
+
+  "The vibes are immaculate. Yes.",
+
+  "Ask again after a snack.",
+
+  "Hmm... suspiciously possible.",
+
+  "Maybe. Don't rush it.",
+
+  "The cat refuses to elaborate.",
+
+  "Not today bestie.",
+
+  "Absolutely not 😭",
+
+  "The universe is giving side eye.",
+
+  "Proceed with caution.",
+
+  "Only if you drink water first 💧",
+
+  "Take a nap and ask again later.",
+
+  "The answer is hidden in your playlist 🎧",
+
+  "Trust your gut.",
+
+  "Why are you asking me? YOU KNOW.",
+
+  "The prophecy has been revealed ✨"
+
+];
+
+
+/* SPECIAL PERSONAL RESPONSES */
+
+const specialResponses = {
+
+  "should i nap": [
+    "YES. Go take that nap immediately. 😴",
+    "The oracle has officially prescribed a nap.",
+    "Only a tiny little 4 hour nap."
+  ],
+
+  "does jaelyn love me": [
+    "Obviously. Next question. 💚",
+    "More than iced coffee.",
+    "The Magic Ball confirms: YES x1000."
+  ],
+
+  "should i drink water": [
+    "YES. GET THE WATER. 💧",
+    "Hydration is mandatory bestie.",
+    "The oracle is disappointed you had to ask."
+  ],
+
+  "should i study": [
+    "Unfortunately... yes. 📚",
+    "Go study for 25 minutes then come back.",
+    "The Pomodoro timer is waiting for you."
+  ],
+
+  "am i pretty": [
+    "Error: question has an obvious answer.",
+    "YES??? Why are we even asking?",
+    "The universe paused because obviously."
+  ],
+
+  "should i text them": [
+    "Hmm... put the phone down for 10 minutes first.",
+    "Ask yourself: will future you cringe?",
+    "The Magic Ball has entered airplane mode."
+  ],
+
+  "should i get a sweet treat": [
+    "YES. This was never a question.",
+    "The universe supports little treats.",
+    "Absolutely. You deserve the sweet treat."
+  ]
+
+};
+
+
+/* ========================= */
+/* OPTIONAL VOICE RECORDINGS */
+/* ========================= */
+
+const audioResponses = {
+
+  yes: [
+    "audio/yes1.mp3",
+    "audio/yes2.mp3"
+  ],
+
+  no: [
+    "audio/no1.mp3"
+  ],
+
+  nap: [
+    "audio/nap.mp3"
+  ],
+
+  love: [
+    "audio/love.mp3"
+  ],
+
+  water: [
+    "audio/water.mp3"
+  ],
+
+  treat: [
+    "audio/treat.mp3"
+  ]
+
+};
+
+
+/* FIND SPECIAL ANSWER */
+
+function getSpecialAnswer(question) {
+
+  const lowerQuestion =
+    question.toLowerCase();
+
+  for (const key in specialResponses) {
+
+    if (lowerQuestion.includes(key)) {
+
+      const answers =
+        specialResponses[key];
+
+      return answers[
+        Math.floor(
+          Math.random() * answers.length
+        )
+      ];
+
+    }
+
+  }
+
+  return null;
+
+}
+
+
+/* RANDOM ANSWER */
+
+function getRandomResponse() {
+
+  return magicResponses[
+    Math.floor(
+      Math.random() *
+      magicResponses.length
+    )
+  ];
+
+}
+
+
+/* DETERMINE WHICH AUDIO TO PLAY */
+
+function getAudioCategory(
+  question,
+  answer
+) {
+
+  const lowerQuestion =
+    question.toLowerCase();
+
+  const lowerAnswer =
+    answer.toLowerCase();
+
+
+  if (
+    lowerQuestion.includes("nap") ||
+    lowerAnswer.includes("nap")
+  ) {
+    return "nap";
+  }
+
+
+  if (
+    lowerQuestion.includes("love") ||
+    lowerQuestion.includes("jaelyn")
+  ) {
+    return "love";
+  }
+
+
+  if (
+    lowerQuestion.includes("water")
+  ) {
+    return "water";
+  }
+
+
+  if (
+    lowerQuestion.includes("sweet treat") ||
+    lowerQuestion.includes("treat")
+  ) {
+    return "treat";
+  }
+
+
+  if (
+    lowerAnswer.includes("yes") ||
+    lowerAnswer.includes("definitely") ||
+    lowerAnswer.includes("absolutely")
+  ) {
+    return "yes";
+  }
+
+
+  if (
+    lowerAnswer.includes("not") ||
+    lowerAnswer.includes("no")
+  ) {
+    return "no";
+  }
+
+
+  return null;
+
+}
+
+
+/* PLAY YOUR VOICE RECORDING */
+
+function playPersonalAudio(category) {
+
+  if (!category) return;
+
+
+  const sounds =
+    audioResponses[category];
+
+
+  if (!sounds || sounds.length === 0) return;
+
+
+  const randomSound =
+    sounds[
+      Math.floor(
+        Math.random() *
+        sounds.length
+      )
+    ];
+
+
+  const audio =
+    new Audio(randomSound);
+
+
+  audio.play()
+    .catch(error => {
+
+      console.log(
+        "Audio could not play:",
+        error
+      );
+
+    });
+
+}
+
+
+/* ========================= */
+/* SHAKE THE MAGIC BALL */
+/* ========================= */
+
+function shakeMagicBall() {
+
+
+  const question =
+    magicQuestion.value.trim();
+
+
+  /* REQUIRE QUESTION */
+
+  if (!question) {
+
+    magicAnswer.textContent =
+      "Ask me a yes or no question first 👀";
+
+    magicAnswer.classList.remove(
+      "answer-show"
+    );
+
+    void magicAnswer.offsetWidth;
+
+    magicAnswer.classList.add(
+      "answer-show"
+    );
+
+    return;
+
+  }
+
+
+  /* DISABLE BUTTON */
+
+  shakeBall.disabled = true;
+
+
+  /* THINKING MESSAGE */
+
+  magicAnswer.textContent =
+    "consulting the universe... 🔮";
+
+
+  /* RESET SHAKE */
+
+  magicBall.classList.remove(
+    "ball-shake"
+  );
+
+
+  void magicBall.offsetWidth;
+
+
+  /* SHAKE */
+
+  magicBall.classList.add(
+    "ball-shake"
+  );
+
+
+  /* SPIN FACE */
+
+  if (ballFace) {
+
+    ballFace.classList.add(
+      "face-spin"
+    );
+
+  }
+
+
+  /* DRAMATIC PAUSE */
+
+  setTimeout(() => {
+
+
+    /* SPECIAL ANSWER */
+
+    const specialAnswer =
+      getSpecialAnswer(question);
+
+
+    /* RANDOM ANSWER IF NOT SPECIAL */
+
+    const answer =
+      specialAnswer ||
+      getRandomResponse();
+
+
+    /* SHOW ANSWER */
+
+    magicAnswer.textContent =
+      answer;
+
+
+    /* ANSWER ANIMATION */
+
+    magicAnswer.classList.remove(
+      "answer-show"
+    );
+
+
+    void magicAnswer.offsetWidth;
+
+
+    magicAnswer.classList.add(
+      "answer-show"
+    );
+
+
+    /* AUDIO CATEGORY */
+
+    const category =
+      getAudioCategory(
+        question,
+        answer
+      );
+
+
+    /* PLAY AUDIO */
+
+    playPersonalAudio(category);
+
+
+    /* RE-ENABLE BUTTON */
+
+    shakeBall.disabled =
+      false;
+
+
+    /* STOP FACE ANIMATION */
+
+    if (ballFace) {
+
+      ballFace.classList.remove(
+        "face-spin"
+      );
+
+    }
+
+
+  }, 1500);
+
+}
+
+
+/* ========================= */
+/* BUTTON EVENTS */
 /* ========================= */
 
 
-const chatInput =
-document.getElementById("chatInput");
+/* SHAKE BUTTON */
 
-
-const sendChat =
-document.getElementById("sendChat");
-
-
-const chatMessages =
-document.getElementById("chatMessages");
-
-
-const avatar =
-document.getElementById("jaelynAvatar");
-const avatarStatus =
-document.getElementById("avatarStatus");
-
-const avatarPhrases = [
-
-"waiting for Addie ✨",
-
-"thinking about snacks and playlists 🎧",
-
-"here for emotional support 💚",
-
-"being cute, obviously 🐾",
-
-"ready to help you study 📚"
-
-];
-
-let avatarPhraseIndex = 0;
-
-
-
-function addMessage(text,type){
-
-
-const div =
-document.createElement("div");
-
-
-div.className =
-type;
-
-
-div.textContent =
-text;
-
-
-chatMessages.appendChild(div);
-
-
-chatMessages.scrollTop =
-chatMessages.scrollHeight;
-
-
-}
-
-
-
-
-async function sendMessage(){
-
-function nudgeAvatar(){
-
-if(!avatar || !avatarStatus) return;
-
-avatarPhraseIndex =
-(avatarPhraseIndex + 1) % avatarPhrases.length;
-
-avatarStatus.textContent = avatarPhrases[avatarPhraseIndex];
-
-avatar.classList.remove("avatar-nudge");
-
-void avatar.offsetWidth;
-
-avatar.classList.add("avatar-nudge");
-
-}
-
-const message =
-chatInput.value.trim();
-
-
-
-if(!message)
-return;
-
-
-
-addMessage(
-message,
-"user-message"
+shakeBall?.addEventListener(
+  "click",
+  shakeMagicBall
 );
 
 
+/* CLICK BALL */
 
-chatInput.value="";
-
-
-
-startTalking();
-
-
-
-const response =
-await fetch(
-
-"addie-chatbot.jaelyn-jacinto97.workers.dev",
-{
-
-method:"POST",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:JSON.stringify({
-
-message
-
-})
-
-}
-
+magicBall?.addEventListener(
+  "click",
+  shakeMagicBall
 );
 
 
+/* ENTER KEY */
 
-const data =
-await response.json();
+magicQuestion?.addEventListener(
+  "keydown",
+  event => {
 
+    if (event.key === "Enter") {
 
+      shakeMagicBall();
 
-stopTalking();
+    }
 
-
-
-addMessage(
-data.reply,
-"bot-message"
+  }
 );
 
 
+/* ========================= */
+/* EXAMPLE QUESTIONS */
+/* ========================= */
 
-speak(data.reply);
+const exampleQuestions =
+  document.querySelectorAll(
+    ".example-question"
+  );
 
 
-}
+exampleQuestions.forEach(button => {
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      magicQuestion.value =
+        button.textContent.trim();
 
 
+      /* Scroll slightly upward */
 
-sendChat.onclick =
-sendMessage;
+      magicQuestion.focus();
 
-avatar?.addEventListener("click", nudgeAvatar);
-
-avatar?.addEventListener("keydown", event => {
-
-if(event.key === "Enter" || event.key === " "){
-
-event.preventDefault();
-
-nudgeAvatar();
-
-}
+    }
+  );
 
 });
-
-
-
-chatInput.addEventListener(
-"keypress",
-(e)=>{
-
-if(e.key==="Enter")
-sendMessage();
-
-});
-
-/* Mouth movement animation for avatar */
-
-let talkingInterval;
-
-
-function startTalking(){
-
-
-let mouths=[
-
-"images/jaelyn-mouth1.png",
-
-"images/jaelyn-mouth2.png",
-
-"images/jaelyn-mouth3.png"
-
-];
-
-
-let i=0;
-
-
-talkingInterval=setInterval(()=>{
-
-
-avatar.src=
-mouths[i];
-
-
-i++;
-
-if(i>=mouths.length)
-i=0;
-
-
-},150);
-
-
-}
-
-
-
-function stopTalking(){
-
-
-clearInterval(talkingInterval);
-
-
-avatar.src=
-"images/jaelyn-idle.png";
-
-
-}
-/* ---- Voice for Catbot---- */
-
-function speak(text){
-
-
-const speech =
-new SpeechSynthesisUtterance(text);
-
-
-speech.rate=.95;
-
-speech.pitch=1.1;
-
-
-speech.onstart =
-startTalking;
-
-
-speech.onend =
-stopTalking;
-
-
-
-speechSynthesis.speak(speech);
-
-
-}
