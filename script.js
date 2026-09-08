@@ -1,56 +1,83 @@
-/* TAB SWITCHING */
+/* ========================= */
+/* TAB SOUND EFFECTS */
+/* ========================= */
 
-const tabButtons =
-  document.querySelectorAll(".tab-btn");
+const tabSounds = {
 
-const tabContents =
-  document.querySelectorAll(".tab-content");
+  home: "Audio/Tabs/home.mp3",
 
-let applauseAudioContext = null;
+  addipedia: "Audio/whoosh.mp3",
 
-function playAwardsApplause() {
-  const awardsSound = new Audio("Audio/awardscelebrate.mp3");
+  about: "Audio/Tabs/about.mp3",
 
-  awardsSound.volume = 1;
-  awardsSound.currentTime = 0;
+  memories: "Audio/Tabs/memories.mp3",
 
-  awardsSound.play().catch(() => {
-    /* Ignore autoplay or missing-file failures. */
-  });
+  study: "Audio/Tabs/study.mp3",
+
+  thoughts: "Audio/Tabs/thoughts.mp3",
+
+  future: "Audio/Tabs/future.mp3",
+
+  cats: "Audio/Tabs/cats.mp3",
+
+  awards: "Audio/awardscelebrate.mp3",
+
+  magicball: "Audio/Tabs/magicball.mp3"
+
+};
+
+
+let currentTabAudio = null;
+
+
+function playTabSound(tabName) {
+
+  const soundFile =
+    tabSounds[tabName];
+
+
+  if (!soundFile) return;
+
+
+  /* Stop previous tab sound if still playing */
+
+  if (currentTabAudio) {
+
+    currentTabAudio.pause();
+
+    currentTabAudio.currentTime = 0;
+
+  }
+
+
+  currentTabAudio =
+    new Audio(soundFile);
+
+
+  /* Keep normal tab sounds softer */
+
+  if (tabName === "awards") {
+
+    currentTabAudio.volume = 1;
+
+  } else {
+
+    currentTabAudio.volume = 0.45;
+
+  }
+
+
+  currentTabAudio.play()
+    .catch(() => {
+
+      /*
+        Ignore autoplay
+        or missing-file errors.
+      */
+
+    });
+
 }
-
-tabButtons.forEach(button => {
-
-  button.addEventListener("click", () => {
-
-    const target =
-      button.dataset.tab;
-
-    /* REMOVE ACTIVE */
-
-    tabButtons.forEach(btn => {
-      btn.classList.remove("active");
-    });
-
-    tabContents.forEach(content => {
-      content.classList.remove("active");
-    });
-
-    /* ADD ACTIVE */
-
-    button.classList.add("active");
-
-    document
-      .getElementById(target)
-      .classList.add("active");
-
-    if (target === "awards") {
-      playAwardsApplause();
-    }
-
-  });
-
-});
 
 
 /* DAY AND NIGHT MODE */
@@ -1138,7 +1165,7 @@ const specialResponses = {
     "Only a tiny little 4 hour nap."
   ],
 
-  "does jaelyn love me": [
+  "does cat love me": [
     "Obviously. Next question. 💚",
     "More than iced coffee.",
     "The Magic Ball confirms: YES x1000."
