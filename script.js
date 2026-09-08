@@ -2,15 +2,26 @@
 /* TAB SOUND EFFECTS */
 /* ========================= */
 
+/*
+  Each key MUST match the data-tab value
+  from your navbar buttons.
+
+  Example:
+  <button class="tab-btn" data-tab="home">Home</button>
+
+  You can change any audio filename below
+  to match the sounds you download.
+*/
+
 const tabSounds = {
 
   home: "Audio/Tabs/home.mp3",
 
-  addipedia: "Audio/whoosh.mp3",
+  favorites: "Audio/whoosh.mp3",
 
   about: "Audio/Tabs/about.mp3",
 
-  memories: "Audio/Tabs/memories.mp3",
+  memory: "Audio/Tabs/memories.mp3",
 
   study: "Audio/Tabs/study.mp3",
 
@@ -20,15 +31,32 @@ const tabSounds = {
 
   cats: "Audio/Tabs/cats.mp3",
 
+  /*
+    Keep your existing Awards celebration sound
+  */
   awards: "Audio/awardscelebrate.mp3",
 
-  magicball: "Audio/Tabs/magicball.mp3"
+  /*
+    Your old Contact tab is now
+    the Magic Bestie 8 Ball.
+    Keep data-tab="contact" in the HTML.
+  */
+  contact: "Audio/Tabs/magicball.mp3"
 
 };
 
 
+/*
+  Stores whichever tab sound
+  is currently playing.
+*/
+
 let currentTabAudio = null;
 
+
+/* ========================= */
+/* PLAY TAB SOUND */
+/* ========================= */
 
 function playTabSound(tabName) {
 
@@ -36,10 +64,21 @@ function playTabSound(tabName) {
     tabSounds[tabName];
 
 
+  /*
+    If this tab doesn't have
+    a sound assigned, do nothing.
+  */
+
   if (!soundFile) return;
 
 
-  /* Stop previous tab sound if still playing */
+  /*
+    Stop the previous sound.
+
+    This prevents sounds from
+    overlapping when Addie clicks
+    through tabs quickly.
+  */
 
   if (currentTabAudio) {
 
@@ -50,11 +89,20 @@ function playTabSound(tabName) {
   }
 
 
+  /*
+    Create the new audio.
+  */
+
   currentTabAudio =
     new Audio(soundFile);
 
 
-  /* Keep normal tab sounds softer */
+  /*
+    Awards stays louder because
+    it's the celebration sound.
+
+    Other tabs are softer.
+  */
 
   if (tabName === "awards") {
 
@@ -67,18 +115,248 @@ function playTabSound(tabName) {
   }
 
 
-  currentTabAudio.play()
-    .catch(() => {
+  /*
+    Play the sound.
 
-      /*
-        Ignore autoplay
-        or missing-file errors.
-      */
+    catch() prevents an audio error
+    from breaking your website if a
+    file is missing.
+  */
+
+  currentTabAudio
+    .play()
+    .catch(error => {
+
+      console.log(
+        `Could not play ${tabName} tab sound:`,
+        error
+      );
 
     });
 
 }
 
+
+/* ========================= */
+/* TAB SWITCHING */
+/* ========================= */
+
+const tabButtons =
+  document.querySelectorAll(".tab-btn");
+
+
+const tabContents =
+  document.querySelectorAll(".tab-content");
+
+
+tabButtons.forEach(button => {
+
+  button.addEventListener(
+    "click",
+    () => {
+
+
+      /*
+        Get the tab name from
+        data-tab="..."
+      */
+
+      const target =
+        button.dataset.tab;
+
+
+      /*
+        Remove active state
+        from ALL navbar buttons.
+      */
+
+      tabButtons.forEach(btn => {
+
+        btn.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      /*
+        Hide ALL tab sections.
+      */
+
+      tabContents.forEach(content => {
+
+        content.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      /*
+        Make clicked navbar
+        button active.
+      */
+
+      button.classList.add(
+        "active"
+      );
+
+
+      /*
+        Find the corresponding
+        section and show it.
+      */
+
+      const targetSection =
+        document.getElementById(
+          target
+        );
+
+
+      if (targetSection) {
+
+        targetSection.classList.add(
+          "active"
+        );
+
+      }
+
+
+      /*
+        Play this tab's
+        sound effect.
+      */
+
+      playTabSound(target);
+
+
+      /*
+        Scroll back to the top
+        whenever a new tab opens.
+      */
+
+      window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+      });
+
+    }
+
+  );
+
+});
+
+
+/* ========================= */
+/* OPTIONAL:
+   KEYBOARD ACCESSIBILITY */
+/* ========================= */
+
+/*
+  If your .tab-btn elements are
+  actual <button> elements, Enter
+  and Space already work automatically.
+
+  This section adds arrow-key navigation
+  between the tabs.
+*/
+
+tabButtons.forEach((button, index) => {
+
+  button.addEventListener(
+    "keydown",
+    event => {
+
+
+      let newIndex = index;
+
+
+      /*
+        RIGHT ARROW
+      */
+
+      if (event.key === "ArrowRight") {
+
+        newIndex =
+          (index + 1) %
+          tabButtons.length;
+
+      }
+
+
+      /*
+        LEFT ARROW
+      */
+
+      else if (
+        event.key === "ArrowLeft"
+      ) {
+
+        newIndex =
+          (
+            index -
+            1 +
+            tabButtons.length
+          ) %
+          tabButtons.length;
+
+      }
+
+
+      /*
+        HOME KEY
+      */
+
+      else if (
+        event.key === "Home"
+      ) {
+
+        newIndex = 0;
+
+      }
+
+
+      /*
+        END KEY
+      */
+
+      else if (
+        event.key === "End"
+      ) {
+
+        newIndex =
+          tabButtons.length - 1;
+
+      }
+
+
+      else {
+
+        return;
+
+      }
+
+
+      event.preventDefault();
+
+
+      /*
+        Move keyboard focus
+        to the new tab.
+      */
+
+      tabButtons[
+        newIndex
+      ].focus();
+
+    }
+
+  );
+
+});
 
 /* DAY AND NIGHT MODE */
 
