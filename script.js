@@ -1482,11 +1482,27 @@ const audioResponses = {
 
   yes: [
     "audio/yes1.mp3",
-    "audio/yes2.mp3"
+    "audio/yes2.mp3",
+    "audio/yes3.mp3"
+  ],
+
+  maybe:  [
+    "audio/maybe1.mp3",
+    "audio/maybe2.mp3",
+    "audio/maybe3.mp3"
   ],
 
   no: [
-    "audio/no1.mp3"
+    "audio/no1.mp3",
+    "audio/no2.mp3",
+    "audio/no3.mp3"
+  ],
+
+  random: [
+    "audio/phrase1.mp3",
+    "audio/phrase2.mp3",
+    "audio/phrase3.mp3",
+    "audio/phrase4.mp3"
   ],
 
   nap: [
@@ -1575,7 +1591,7 @@ function getAudioCategory(
 
   if (
     lowerQuestion.includes("love") ||
-    lowerQuestion.includes("jaelyn")
+    lowerQuestion.includes("jaelyn, cat")
   ) {
     return "love";
   }
@@ -1656,7 +1672,6 @@ function playPersonalAudio(category) {
     });
 
 }
-
 
 /* ========================= */
 /* SHAKE THE MAGIC BALL */
@@ -1803,7 +1818,6 @@ function shakeMagicBall() {
   }, 1500);
 
 }
-
 
 /* ========================= */
 /* BUTTON EVENTS */
