@@ -2282,6 +2282,10 @@ function unlockWebsite() {
     passwordInput.value.trim();
 
 
+  /* ========================= */
+  /* CORRECT PASSWORD */
+  /* ========================= */
+
   if (enteredPassword === correctPassword) {
 
     passwordMessage.textContent =
@@ -2292,9 +2296,33 @@ function unlockWebsite() {
       "#4f7a59";
 
 
-    /*
-      Remember access during this browser session
-    */
+    /* ========================= */
+    /* PLAY UNLOCK SOUND */
+    /* ========================= */
+
+    const unlockSound =
+      new Audio("Audio/unlock.mp3");
+
+
+    unlockSound.volume =
+      0.7;
+
+
+    unlockSound
+      .play()
+      .catch(error => {
+
+        console.log(
+          "Unlock sound could not play:",
+          error
+        );
+
+      });
+
+
+    /* ========================= */
+    /* REMEMBER ACCESS */
+    /* ========================= */
 
     sessionStorage.setItem(
       "addieWorldUnlocked",
@@ -2302,15 +2330,24 @@ function unlockWebsite() {
     );
 
 
+    /* ========================= */
+    /* OPEN THE WEBSITE */
+    /* ========================= */
+
     setTimeout(() => {
 
       lockScreen.classList.add(
         "unlocked"
       );
 
-    }, 700);
+    }, 1000);
 
   }
+
+
+  /* ========================= */
+  /* WRONG PASSWORD */
+  /* ========================= */
 
   else {
 
@@ -2335,7 +2372,8 @@ function unlockWebsite() {
     );
 
 
-    passwordInput.value = "";
+    passwordInput.value =
+      "";
 
 
     passwordInput.focus();
@@ -2343,51 +2381,3 @@ function unlockWebsite() {
   }
 
 }
-
-
-/* UNLOCK BUTTON */
-
-unlockButton?.addEventListener(
-  "click",
-  unlockWebsite
-);
-
-
-/* PRESS ENTER */
-
-passwordInput?.addEventListener(
-  "keydown",
-  event => {
-
-    if (event.key === "Enter") {
-
-      unlockWebsite();
-
-    }
-
-  }
-);
-
-
-/* CHECK IF ALREADY UNLOCKED */
-
-window.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    const isUnlocked =
-      sessionStorage.getItem(
-        "addieWorldUnlocked"
-      );
-
-
-    if (isUnlocked === "true") {
-
-      lockScreen.classList.add(
-        "unlocked"
-      );
-
-    }
-
-  }
-);
