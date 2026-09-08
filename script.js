@@ -2257,8 +2257,19 @@ exampleQuestions.forEach(
 /* PASSWORD PROTECTION */
 /* ========================= */
 
+/*
+  SECRET PASSWORD
+
+  This is case-sensitive.
+*/
+
 const correctPassword =
   "POMPOMPURRIN";
+
+
+/* ========================= */
+/* GET LOCK SCREEN ELEMENTS */
+/* ========================= */
 
 const lockScreen =
   document.getElementById("lockScreen");
@@ -2276,7 +2287,43 @@ const lockCard =
   document.querySelector(".lock-card");
 
 
+/* ========================= */
+/* UNLOCK SOUND */
+/* ========================= */
+
+/*
+  Make sure this file exists:
+
+  Audio/unlock.mp3
+*/
+
+const unlockSound =
+  new Audio("Audio/unlock.mp3");
+
+unlockSound.volume = 0.7;
+
+
+/* ========================= */
+/* UNLOCK WEBSITE */
+/* ========================= */
+
 function unlockWebsite() {
+
+  /*
+    Safety check in case the
+    password input is missing.
+  */
+
+  if (!passwordInput) {
+
+    console.error(
+      "hmm... the bestie council says no 👀 please try again."
+    );
+
+    return;
+
+  }
+
 
   const enteredPassword =
     passwordInput.value.trim();
@@ -2286,31 +2333,46 @@ function unlockWebsite() {
   /* CORRECT PASSWORD */
   /* ========================= */
 
-  if (enteredPassword === correctPassword) {
+  if (
+    enteredPassword === correctPassword
+  ) {
 
-    passwordMessage.textContent =
-      "access granted, bestie 💚✨";
+    console.log(
+      "Correct password!"
+    );
 
 
-    passwordMessage.style.color =
-      "#4f7a59";
+    /* SUCCESS MESSAGE */
+
+    if (passwordMessage) {
+
+      passwordMessage.textContent =
+        "Access granted, bestie 💚✨";
+
+      passwordMessage.style.color =
+        "#4f7a59";
+
+    }
 
 
     /* ========================= */
     /* PLAY UNLOCK SOUND */
     /* ========================= */
 
-    const unlockSound =
-      new Audio("Audio/unlock.mp3");
-
-
-    unlockSound.volume =
-      0.7;
+    unlockSound.currentTime = 0;
 
 
     unlockSound
       .play()
       .catch(error => {
+
+        /*
+          IMPORTANT:
+
+          Even if the audio file
+          cannot play, the website
+          will STILL unlock.
+        */
 
         console.log(
           "Unlock sound could not play:",
@@ -2321,26 +2383,58 @@ function unlockWebsite() {
 
 
     /* ========================= */
-    /* REMEMBER ACCESS */
+    /* REMEMBER UNLOCK */
     /* ========================= */
 
-    sessionStorage.setItem(
-      "addieWorldUnlocked",
-      "true"
-    );
+    try {
+
+      sessionStorage.setItem(
+        "addieWorldUnlocked",
+        "true"
+      );
+
+    } catch (error) {
+
+      console.log(
+        "Session storage unavailable."
+      );
+
+    }
 
 
     /* ========================= */
-    /* OPEN THE WEBSITE */
+    /* DISABLE BUTTON TEMPORARILY */
+    /* ========================= */
+
+    if (unlockButton) {
+
+      unlockButton.disabled =
+        true;
+
+      unlockButton.textContent =
+        "Opening... ✨";
+
+    }
+
+
+    /* ========================= */
+    /* OPEN WEBSITE */
     /* ========================= */
 
     setTimeout(() => {
 
-      lockScreen.classList.add(
-        "unlocked"
-      );
+      if (lockScreen) {
 
-    }, 1000);
+        lockScreen.classList.add(
+          "unlocked"
+        );
+
+      }
+
+    }, 900);
+
+
+    return;
 
   }
 
@@ -2349,20 +2443,34 @@ function unlockWebsite() {
   /* WRONG PASSWORD */
   /* ========================= */
 
-  else {
+  console.log(
+    "Incorrect password."
+  );
+
+
+  if (passwordMessage) {
 
     passwordMessage.textContent =
       "hmm... the bestie council says no 👀";
 
-
     passwordMessage.style.color =
       "#a85f5f";
 
+  }
+
+
+  /* SHAKE ERROR ANIMATION */
+
+  if (lockCard) {
 
     lockCard.classList.remove(
       "shake-error"
     );
 
+
+    /*
+      Force animation restart.
+    */
 
     void lockCard.offsetWidth;
 
@@ -2371,13 +2479,122 @@ function unlockWebsite() {
       "shake-error"
     );
 
-
-    passwordInput.value =
-      "";
-
-
-    passwordInput.focus();
-
   }
 
+
+  /* CLEAR PASSWORD */
+
+  passwordInput.value =
+    "";
+
+
+  /* RETURN TO INPUT */
+
+  passwordInput.focus();
+
 }
+
+
+/* ========================= */
+/* UNLOCK BUTTON */
+/* ========================= */
+
+unlockButton?.addEventListener(
+  "click",
+  event => {
+
+    /*
+      Prevent a form from refreshing
+      the page if your button happens
+      to be inside one.
+    */
+
+    event.preventDefault();
+
+
+    unlockWebsite();
+
+  }
+);
+
+
+/* ========================= */
+/* PRESS ENTER TO UNLOCK */
+/* ========================= */
+
+passwordInput?.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      event.preventDefault();
+
+
+      unlockWebsite();
+
+    }
+
+  }
+);
+
+
+/* ========================= */
+/* CHECK PREVIOUS ACCESS */
+/* ========================= */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    if (!lockScreen) {
+
+      console.error(
+        "Lock screen was not found."
+      );
+
+      return;
+
+    }
+
+
+    let isUnlocked = null;
+
+
+    try {
+
+      isUnlocked =
+        sessionStorage.getItem(
+          "addieWorldUnlocked"
+        );
+
+    } catch (error) {
+
+      console.log(
+        "Session storage unavailable."
+      );
+
+    }
+
+
+    /*
+      If Addie already entered the
+      password during this browser
+      session, don't show the lock
+      screen again.
+    */
+
+    if (
+      isUnlocked === "true"
+    ) {
+
+      lockScreen.classList.add(
+        "unlocked"
+      );
+
+    }
+
+  }
+);
