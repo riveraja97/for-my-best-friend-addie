@@ -1376,106 +1376,310 @@ const ballFace =
   document.getElementById("magicFace");
 
 
-/* MAGIC RESPONSES */
+/* ========================= */
+/* BASIC MAGIC RESPONSES */
+/* ========================= */
+
+/*
+  IMPORTANT:
+
+  Each response now has a TYPE.
+
+  type: "yes"
+  type: "no"
+  type: "maybe"
+
+  This means the answer no longer has to
+  literally contain the word "yes" or "no"
+  for the correct audio to play.
+*/
 
 const magicResponses = [
 
-  "Yes. Absolutely. ✨",
+  /* YES */
 
-  "The universe says yes.",
+  {
+    text: "Yes. Absolutely. ✨",
+    type: "yes"
+  },
 
-  "Without a doubt.",
+  {
+    text: "The universe says yes.",
+    type: "yes"
+  },
 
-  "Signs point to yes.",
+  {
+    text: "Without a doubt.",
+    type: "yes"
+  },
 
-  "Definitely bestie.",
+  {
+    text: "Signs point to yes.",
+    type: "yes"
+  },
 
-  "You already know the answer 👀",
+  {
+    text: "Definitely bestie.",
+    type: "yes"
+  },
 
-  "The vibes are immaculate. Yes.",
+  {
+    text: "You already know the answer 👀",
+    type: "yes"
+  },
 
-  "Ask again after a snack.",
+  {
+    text: "The vibes are immaculate. Yes.",
+    type: "yes"
+  },
 
-  "Hmm... suspiciously possible.",
 
-  "Maybe. Don't rush it.",
+  /* MAYBE */
 
-  "The cat refuses to elaborate.",
+  {
+    text: "Ask again after a snack.",
+    type: "maybe"
+  },
 
-  "Not today bestie.",
+  {
+    text: "Hmm... suspiciously possible.",
+    type: "maybe"
+  },
 
-  "Absolutely not 😭",
+  {
+    text: "Maybe. Don't rush it.",
+    type: "maybe"
+  },
 
-  "The universe is giving side eye.",
+  {
+    text: "The cat refuses to elaborate.",
+    type: "maybe"
+  },
 
-  "Proceed with caution.",
+  {
+    text: "Proceed with caution.",
+    type: "maybe"
+  },
 
-  "Only if you drink water first 💧",
+  {
+    text: "Only if you drink water first 💧",
+    type: "maybe"
+  },
 
-  "Take a nap and ask again later.",
+  {
+    text: "Take a nap and ask again later.",
+    type: "maybe"
+  },
 
-  "The answer is hidden in your playlist 🎧",
+  {
+    text: "The answer is hidden in your playlist 🎧",
+    type: "maybe"
+  },
 
-  "Trust your gut.",
+  {
+    text: "Trust your gut.",
+    type: "maybe"
+  },
 
-  "Why are you asking me? YOU KNOW.",
+  {
+    text: "The prophecy remains mysterious ✨",
+    type: "maybe"
+  },
 
-  "The prophecy has been revealed ✨"
+
+  /* NO */
+
+  {
+    text: "Not today bestie.",
+    type: "no"
+  },
+
+  {
+    text: "Absolutely not 😭",
+    type: "no"
+  },
+
+  {
+    text: "The universe is giving side eye.",
+    type: "no"
+  },
+
+  {
+    text: "Girl... I would not do that.",
+    type: "no"
+  },
+
+  {
+    text: "The cat has officially voted no.",
+    type: "no"
+  }
 
 ];
 
 
+/* ========================= */
 /* SPECIAL PERSONAL RESPONSES */
+/* ========================= */
+
+/*
+  These responses can have their own
+  voice category.
+
+  Example:
+
+  type: "nap"
+
+  plays something from:
+
+  audioResponses.nap
+*/
 
 const specialResponses = {
 
   "should i nap": [
-    "YES. Go take that nap immediately. 😴",
-    "The oracle has officially prescribed a nap.",
-    "Only a tiny little 4 hour nap."
+
+    {
+      text: "YES. Go take that nap immediately. 😴",
+      type: "nap"
+    },
+
+    {
+      text: "The oracle has officially prescribed a nap.",
+      type: "nap"
+    },
+
+    {
+      text: "Only a tiny little 4 hour nap.",
+      type: "nap"
+    }
+
   ],
+
 
   "does cat love me": [
-    "Obviously. Next question. 💚",
-    "More than iced coffee.",
-    "The Magic Ball confirms: YES x1000."
+
+    {
+      text: "Obviously. Next question. 💚",
+      type: "love"
+    },
+
+    {
+      text: "More than iced coffee.",
+      type: "love"
+    },
+
+    {
+      text: "The Magic Ball confirms: YES x1000.",
+      type: "love"
+    }
+
   ],
+
 
   "should i drink water": [
-    "YES. GET THE WATER. 💧",
-    "Hydration is mandatory bestie.",
-    "The oracle is disappointed you had to ask."
+
+    {
+      text: "YES. GET THE WATER. 💧",
+      type: "water"
+    },
+
+    {
+      text: "Hydration is mandatory bestie.",
+      type: "water"
+    },
+
+    {
+      text: "The oracle is disappointed you had to ask.",
+      type: "water"
+    }
+
   ],
+
 
   "should i study": [
-    "Unfortunately... yes. 📚",
-    "Go study for 25 minutes then come back.",
-    "The Pomodoro timer is waiting for you."
+
+    {
+      text: "Unfortunately... yes. 📚",
+      type: "yes"
+    },
+
+    {
+      text: "Go study for 25 minutes then come back.",
+      type: "yes"
+    },
+
+    {
+      text: "The Pomodoro timer is waiting for you.",
+      type: "yes"
+    }
+
   ],
+
 
   "am i pretty": [
-    "Error: question has an obvious answer.",
-    "YES??? Why are we even asking?",
-    "The universe paused because obviously."
+
+    {
+      text: "Error: question has an obvious answer.",
+      type: "yes"
+    },
+
+    {
+      text: "YES??? Why are we even asking?",
+      type: "yes"
+    },
+
+    {
+      text: "The universe paused because obviously.",
+      type: "yes"
+    }
+
   ],
+
 
   "should i text them": [
-    "Hmm... put the phone down for 10 minutes first.",
-    "Ask yourself: will future you cringe?",
-    "The Magic Ball has entered airplane mode."
+
+    {
+      text: "Hmm... put the phone down for 10 minutes first.",
+      type: "maybe"
+    },
+
+    {
+      text: "Ask yourself: will future you cringe?",
+      type: "maybe"
+    },
+
+    {
+      text: "The Magic Ball has entered airplane mode.",
+      type: "no"
+    }
+
   ],
 
+
   "should i get a sweet treat": [
-    "YES. This was never a question.",
-    "The universe supports little treats.",
-    "Absolutely. You deserve the sweet treat."
+
+    {
+      text: "YES. This was never a question.",
+      type: "treat"
+    },
+
+    {
+      text: "The universe supports little treats.",
+      type: "treat"
+    },
+
+    {
+      text: "Absolutely. You deserve the sweet treat.",
+      type: "treat"
+    }
+
   ]
 
 };
 
 
 /* ========================= */
-/* OPTIONAL VOICE RECORDINGS */
+/* YOUR VOICE RECORDINGS */
 /* ========================= */
 
 const audioResponses = {
@@ -1486,7 +1690,7 @@ const audioResponses = {
     "audio/yes3.mp3"
   ],
 
-  maybe:  [
+  maybe: [
     "audio/maybe1.mp3",
     "audio/maybe2.mp3",
     "audio/maybe3.mp3"
@@ -1496,13 +1700,6 @@ const audioResponses = {
     "audio/no1.mp3",
     "audio/no2.mp3",
     "audio/no3.mp3"
-  ],
-
-  random: [
-    "audio/phrase1.mp3",
-    "audio/phrase2.mp3",
-    "audio/phrase3.mp3",
-    "audio/phrase4.mp3"
   ],
 
   nap: [
@@ -1524,108 +1721,85 @@ const audioResponses = {
 };
 
 
-/* FIND SPECIAL ANSWER */
+/* ========================= */
+/* YOUR 4 RANDOM PHRASES */
+/* ========================= */
 
-function getSpecialAnswer(question) {
+/*
+  IMPORTANT:
 
-  const lowerQuestion =
-    question.toLowerCase();
+  Change the "text" values below to the
+  EXACT phrases you recorded yourself saying.
 
-  for (const key in specialResponses) {
+  phrase1.mp3 should match phrase #1,
+  phrase2.mp3 should match phrase #2,
+  etc.
+*/
 
-    if (lowerQuestion.includes(key)) {
+const randomPhrases = [
 
-      const answers =
-        specialResponses[key];
+  {
+    text: "but that's just what the cat told me 👀",
+    audio: "audio/phrase1.mp3"
+  },
 
-      return answers[
-        Math.floor(
-          Math.random() * answers.length
-        )
-      ];
+  {
+    text: "don't blame me, blame the universe ✨",
+    audio: "audio/phrase2.mp3"
+  },
 
-    }
+  {
+    text: "anyway... good luck with that bestie 😭",
+    audio: "audio/phrase3.mp3"
+  },
 
+  {
+    text: "the oracle has spoken 🔮",
+    audio: "audio/phrase4.mp3"
   }
 
-  return null;
-
-}
+];
 
 
-/* RANDOM ANSWER */
+/* ========================= */
+/* RANDOM HELPER */
+/* ========================= */
 
-function getRandomResponse() {
+function getRandomItem(array) {
 
-  return magicResponses[
+  return array[
     Math.floor(
-      Math.random() *
-      magicResponses.length
+      Math.random() * array.length
     )
   ];
 
 }
 
 
-/* DETERMINE WHICH AUDIO TO PLAY */
+/* ========================= */
+/* FIND SPECIAL ANSWER */
+/* ========================= */
 
-function getAudioCategory(
-  question,
-  answer
-) {
+function getSpecialAnswer(question) {
 
   const lowerQuestion =
-    question.toLowerCase();
-
-  const lowerAnswer =
-    answer.toLowerCase();
-
-
-  if (
-    lowerQuestion.includes("nap") ||
-    lowerAnswer.includes("nap")
-  ) {
-    return "nap";
-  }
+    question
+      .toLowerCase()
+      .trim();
 
 
-  if (
-    lowerQuestion.includes("love") ||
-    lowerQuestion.includes("jaelyn, cat")
-  ) {
-    return "love";
-  }
+  for (const key in specialResponses) {
 
+    if (
+      lowerQuestion.includes(key)
+    ) {
 
-  if (
-    lowerQuestion.includes("water")
-  ) {
-    return "water";
-  }
+      return getRandomItem(
+        specialResponses[key]
+      );
 
+    }
 
-  if (
-    lowerQuestion.includes("sweet treat") ||
-    lowerQuestion.includes("treat")
-  ) {
-    return "treat";
-  }
-
-
-  if (
-    lowerAnswer.includes("yes") ||
-    lowerAnswer.includes("definitely") ||
-    lowerAnswer.includes("absolutely")
-  ) {
-    return "yes";
-  }
-
-
-  if (
-    lowerAnswer.includes("not") ||
-    lowerAnswer.includes("no")
-  ) {
-    return "no";
   }
 
 
@@ -1634,50 +1808,283 @@ function getAudioCategory(
 }
 
 
-/* PLAY YOUR VOICE RECORDING */
+/* ========================= */
+/* GET NORMAL RANDOM ANSWER */
+/* ========================= */
 
-function playPersonalAudio(category) {
+function getRandomResponse() {
 
-  if (!category) return;
+  return getRandomItem(
+    magicResponses
+  );
 
+}
+
+
+/* ========================= */
+/* CURRENT AUDIO */
+/* ========================= */
+
+/*
+  Keeping one reference lets us stop
+  old Magic Ball audio if she shakes
+  again before it finishes.
+*/
+
+let currentMagicAudio = null;
+
+
+/* ========================= */
+/* PLAY ONE AUDIO FILE */
+/* ========================= */
+
+function playAudioFile(file) {
+
+  return new Promise(resolve => {
+
+    if (!file) {
+
+      resolve();
+
+      return;
+
+    }
+
+
+    /* Stop previous Magic Ball audio */
+
+    if (currentMagicAudio) {
+
+      currentMagicAudio.pause();
+
+      currentMagicAudio.currentTime = 0;
+
+    }
+
+
+    const audio =
+      new Audio(file);
+
+
+    currentMagicAudio =
+      audio;
+
+
+    audio.volume = 1;
+
+
+    audio.addEventListener(
+      "ended",
+      () => {
+
+        resolve();
+
+      },
+      {
+        once: true
+      }
+    );
+
+
+    audio.addEventListener(
+      "error",
+      () => {
+
+        console.log(
+          "Could not load audio:",
+          file
+        );
+
+        resolve();
+
+      },
+      {
+        once: true
+      }
+    );
+
+
+    audio
+      .play()
+      .catch(error => {
+
+        console.log(
+          "Audio could not play:",
+          error
+        );
+
+        resolve();
+
+      });
+
+  });
+
+}
+
+
+/* ========================= */
+/* PLAY ANSWER VOICE */
+/* ========================= */
+
+async function playAnswerAudio(type) {
 
   const sounds =
-    audioResponses[category];
+    audioResponses[type];
 
 
-  if (!sounds || sounds.length === 0) return;
+  if (
+    !sounds ||
+    sounds.length === 0
+  ) {
+
+    return;
+
+  }
 
 
   const randomSound =
-    sounds[
-      Math.floor(
-        Math.random() *
-        sounds.length
-      )
-    ];
+    getRandomItem(sounds);
 
 
-  const audio =
-    new Audio(randomSound);
-
-
-  audio.play()
-    .catch(error => {
-
-      console.log(
-        "Audio could not play:",
-        error
-      );
-
-    });
+  await playAudioFile(
+    randomSound
+  );
 
 }
+
+
+/* ========================= */
+/* PLAY RANDOM PHRASE VOICE */
+/* ========================= */
+
+async function playRandomPhraseAudio(
+  randomPhrase
+) {
+
+  if (
+    !randomPhrase ||
+    !randomPhrase.audio
+  ) {
+
+    return;
+
+  }
+
+
+  await playAudioFile(
+    randomPhrase.audio
+  );
+
+}
+
+
+/* ========================= */
+/* FACE TALKING ANIMATION */
+/* ========================= */
+
+function startMagicFaceTalking() {
+
+  if (!ballFace) return;
+
+
+  ballFace.classList.add(
+    "magic-face-talking"
+  );
+
+}
+
+
+function stopMagicFaceTalking() {
+
+  if (!ballFace) return;
+
+
+  ballFace.classList.remove(
+    "magic-face-talking"
+  );
+
+}
+
+
+/* ========================= */
+/* PLAY FULL VOICE RESPONSE */
+/* ========================= */
+
+/*
+  Example:
+
+  Magic Ball generates:
+
+  "The universe says yes."
+
+  It will:
+
+  1. Play yes1/yes2/yes3
+  2. Wait for it to finish
+  3. Play phrase1/phrase2/etc.
+*/
+
+async function playMagicVoice(
+  answer,
+  randomPhrase
+) {
+
+  startMagicFaceTalking();
+
+
+  /*
+    First play the audio matching
+    YES / NO / MAYBE / SPECIAL answer.
+  */
+
+  await playAnswerAudio(
+    answer.type
+  );
+
+
+  /*
+    Small pause between recordings.
+  */
+
+  await new Promise(resolve => {
+
+    setTimeout(
+      resolve,
+      250
+    );
+
+  });
+
+
+  /*
+    Then play the matching random
+    phrase recording.
+  */
+
+  await playRandomPhraseAudio(
+    randomPhrase
+  );
+
+
+  stopMagicFaceTalking();
+
+}
+
 
 /* ========================= */
 /* SHAKE THE MAGIC BALL */
 /* ========================= */
 
 function shakeMagicBall() {
+
+  if (
+    !magicQuestion ||
+    !magicAnswer
+  ) {
+
+    return;
+
+  }
 
 
   const question =
@@ -1691,15 +2098,22 @@ function shakeMagicBall() {
     magicAnswer.textContent =
       "Ask me a yes or no question first 👀";
 
+
     magicAnswer.classList.remove(
       "answer-show"
     );
 
+
     void magicAnswer.offsetWidth;
+
 
     magicAnswer.classList.add(
       "answer-show"
     );
+
+
+    magicQuestion.focus();
+
 
     return;
 
@@ -1708,7 +2122,16 @@ function shakeMagicBall() {
 
   /* DISABLE BUTTON */
 
-  shakeBall.disabled = true;
+  if (shakeBall) {
+
+    shakeBall.disabled =
+      true;
+
+
+    shakeBall.textContent =
+      "🔮 consulting the universe...";
+
+  }
 
 
   /* THINKING MESSAGE */
@@ -1719,24 +2142,34 @@ function shakeMagicBall() {
 
   /* RESET SHAKE */
 
-  magicBall.classList.remove(
+  magicBall?.classList.remove(
     "ball-shake"
   );
 
 
-  void magicBall.offsetWidth;
+  if (magicBall) {
+
+    void magicBall.offsetWidth;
 
 
-  /* SHAKE */
+    magicBall.classList.add(
+      "ball-shake"
+    );
 
-  magicBall.classList.add(
-    "ball-shake"
-  );
+  }
 
 
   /* SPIN FACE */
 
   if (ballFace) {
+
+    ballFace.classList.remove(
+      "face-spin"
+    );
+
+
+    void ballFace.offsetWidth;
+
 
     ballFace.classList.add(
       "face-spin"
@@ -1747,77 +2180,111 @@ function shakeMagicBall() {
 
   /* DRAMATIC PAUSE */
 
-  setTimeout(() => {
+  setTimeout(
+    () => {
 
 
-    /* SPECIAL ANSWER */
+      /* CHECK FOR SPECIAL ANSWER */
 
-    const specialAnswer =
-      getSpecialAnswer(question);
-
-
-    /* RANDOM ANSWER IF NOT SPECIAL */
-
-    const answer =
-      specialAnswer ||
-      getRandomResponse();
+      const specialAnswer =
+        getSpecialAnswer(
+          question
+        );
 
 
-    /* SHOW ANSWER */
+      /*
+        Otherwise use one of the
+        normal yes / no / maybe answers.
+      */
 
-    magicAnswer.textContent =
-      answer;
-
-
-    /* ANSWER ANIMATION */
-
-    magicAnswer.classList.remove(
-      "answer-show"
-    );
+      const answer =
+        specialAnswer ||
+        getRandomResponse();
 
 
-    void magicAnswer.offsetWidth;
+      /*
+        Pick ONE of your four
+        random ending phrases.
+      */
+
+      const randomPhrase =
+        getRandomItem(
+          randomPhrases
+        );
 
 
-    magicAnswer.classList.add(
-      "answer-show"
-    );
+      /*
+        Put BOTH pieces together
+        on screen.
+      */
+
+      const fullAnswer =
+        `${answer.text} ${randomPhrase.text}`;
 
 
-    /* AUDIO CATEGORY */
+      magicAnswer.textContent =
+        fullAnswer;
 
-    const category =
-      getAudioCategory(
-        question,
-        answer
+
+      /* ANSWER ANIMATION */
+
+      magicAnswer.classList.remove(
+        "answer-show"
       );
 
 
-    /* PLAY AUDIO */
-
-    playPersonalAudio(category);
+      void magicAnswer.offsetWidth;
 
 
-    /* RE-ENABLE BUTTON */
-
-    shakeBall.disabled =
-      false;
-
-
-    /* STOP FACE ANIMATION */
-
-    if (ballFace) {
-
-      ballFace.classList.remove(
-        "face-spin"
+      magicAnswer.classList.add(
+        "answer-show"
       );
 
-    }
+
+      /*
+        Stop spin animation.
+      */
+
+      if (ballFace) {
+
+        ballFace.classList.remove(
+          "face-spin"
+        );
+
+      }
 
 
-  }, 1500);
+      /*
+        Play the matching answer recording
+        AND the matching random phrase recording.
+      */
+
+      playMagicVoice(
+        answer,
+        randomPhrase
+      );
+
+
+      /* RE-ENABLE BUTTON */
+
+      if (shakeBall) {
+
+        shakeBall.disabled =
+          false;
+
+
+        shakeBall.textContent =
+          "✨ Shake The Magic Ball ✨";
+
+      }
+
+    },
+
+    1500
+  );
 
 }
+
 
 /* ========================= */
 /* BUTTON EVENTS */
@@ -1832,7 +2299,7 @@ shakeBall?.addEventListener(
 );
 
 
-/* CLICK BALL */
+/* CLICK THE BALL */
 
 magicBall?.addEventListener(
   "click",
@@ -1840,13 +2307,38 @@ magicBall?.addEventListener(
 );
 
 
-/* ENTER KEY */
+/* KEYBOARD ON MAGIC BALL */
+
+magicBall?.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Enter" ||
+      event.key === " "
+    ) {
+
+      event.preventDefault();
+
+      shakeMagicBall();
+
+    }
+
+  }
+);
+
+
+/* ENTER IN QUESTION BOX */
 
 magicQuestion?.addEventListener(
   "keydown",
   event => {
 
-    if (event.key === "Enter") {
+    if (
+      event.key === "Enter"
+    ) {
+
+      event.preventDefault();
 
       shakeMagicBall();
 
@@ -1866,24 +2358,24 @@ const exampleQuestions =
   );
 
 
-exampleQuestions.forEach(button => {
+exampleQuestions.forEach(
+  button => {
 
-  button.addEventListener(
-    "click",
-    () => {
+    button.addEventListener(
+      "click",
+      () => {
 
-      magicQuestion.value =
-        button.textContent.trim();
+        magicQuestion.value =
+          button.textContent.trim();
 
 
-      /* Scroll slightly upward */
+        magicQuestion.focus();
 
-      magicQuestion.focus();
+      }
+    );
 
-    }
-  );
-
-});
+  }
+);
 
 /* ========================= */
 /* PASSWORD PROTECTION */
