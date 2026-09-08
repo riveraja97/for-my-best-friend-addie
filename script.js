@@ -1377,21 +1377,16 @@ const ballFace =
 
 
 /* ========================= */
-/* BASIC MAGIC RESPONSES */
+/* MAGIC RESPONSES */
 /* ========================= */
 
 /*
-  IMPORTANT:
+  Every response has a type.
 
-  Each response now has a TYPE.
-
-  type: "yes"
-  type: "no"
-  type: "maybe"
-
-  This means the answer no longer has to
-  literally contain the word "yes" or "no"
-  for the correct audio to play.
+  yes    -> yes recordings
+  no     -> no recordings
+  maybe  -> maybe recordings
+  random -> one of your 4 random phrase recordings
 */
 
 const magicResponses = [
@@ -1424,11 +1419,6 @@ const magicResponses = [
   },
 
   {
-    text: "You already know the answer 👀",
-    type: "yes"
-  },
-
-  {
     text: "The vibes are immaculate. Yes.",
     type: "yes"
   },
@@ -1448,11 +1438,6 @@ const magicResponses = [
 
   {
     text: "Maybe. Don't rush it.",
-    type: "maybe"
-  },
-
-  {
-    text: "The cat refuses to elaborate.",
     type: "maybe"
   },
 
@@ -1478,11 +1463,6 @@ const magicResponses = [
 
   {
     text: "Trust your gut.",
-    type: "maybe"
-  },
-
-  {
-    text: "The prophecy remains mysterious ✨",
     type: "maybe"
   },
 
@@ -1512,6 +1492,39 @@ const magicResponses = [
   {
     text: "The cat has officially voted no.",
     type: "no"
+  },
+
+
+  /* RANDOM / CHAOTIC RESPONSES */
+
+  /*
+    These do NOT play yes/no/maybe audio.
+
+    Instead, they randomly choose:
+    phrase1.mp3
+    phrase2.mp3
+    phrase3.mp3
+    phrase4.mp3
+  */
+
+  {
+    text: "You already know the answer 👀",
+    type: "random"
+  },
+
+  {
+    text: "The cat refuses to elaborate.",
+    type: "random"
+  },
+
+  {
+    text: "Why are you asking me? YOU KNOW.",
+    type: "random"
+  },
+
+  {
+    text: "The prophecy has been revealed ✨",
+    type: "random"
   }
 
 ];
@@ -1520,19 +1533,6 @@ const magicResponses = [
 /* ========================= */
 /* SPECIAL PERSONAL RESPONSES */
 /* ========================= */
-
-/*
-  These responses can have their own
-  voice category.
-
-  Example:
-
-  type: "nap"
-
-  plays something from:
-
-  audioResponses.nap
-*/
 
 const specialResponses = {
 
@@ -1682,6 +1682,11 @@ const specialResponses = {
 /* YOUR VOICE RECORDINGS */
 /* ========================= */
 
+/*
+  These filenames match the setup
+  already present in your JS.
+*/
+
 const audioResponses = {
 
   yes: [
@@ -1702,6 +1707,13 @@ const audioResponses = {
     "audio/no3.mp3"
   ],
 
+  random: [
+    "audio/phrase1.mp3",
+    "audio/phrase2.mp3",
+    "audio/phrase3.mp3",
+    "audio/phrase4.mp3"
+  ],
+
   nap: [
     "audio/nap.mp3"
   ],
@@ -1719,46 +1731,6 @@ const audioResponses = {
   ]
 
 };
-
-
-/* ========================= */
-/* YOUR 4 RANDOM PHRASES */
-/* ========================= */
-
-/*
-  IMPORTANT:
-
-  Change the "text" values below to the
-  EXACT phrases you recorded yourself saying.
-
-  phrase1.mp3 should match phrase #1,
-  phrase2.mp3 should match phrase #2,
-  etc.
-*/
-
-const randomPhrases = [
-
-  {
-    text: "but that's just what the cat told me 👀",
-    audio: "audio/phrase1.mp3"
-  },
-
-  {
-    text: "don't blame me, blame the universe ✨",
-    audio: "audio/phrase2.mp3"
-  },
-
-  {
-    text: "anyway... good luck with that bestie 😭",
-    audio: "audio/phrase3.mp3"
-  },
-
-  {
-    text: "the oracle has spoken 🔮",
-    audio: "audio/phrase4.mp3"
-  }
-
-];
 
 
 /* ========================= */
@@ -1809,7 +1781,7 @@ function getSpecialAnswer(question) {
 
 
 /* ========================= */
-/* GET NORMAL RANDOM ANSWER */
+/* RANDOM NORMAL ANSWER */
 /* ========================= */
 
 function getRandomResponse() {
@@ -1822,114 +1794,42 @@ function getRandomResponse() {
 
 
 /* ========================= */
-/* CURRENT AUDIO */
+/* MAGIC BALL AUDIO */
 /* ========================= */
-
-/*
-  Keeping one reference lets us stop
-  old Magic Ball audio if she shakes
-  again before it finishes.
-*/
 
 let currentMagicAudio = null;
 
 
 /* ========================= */
-/* PLAY ONE AUDIO FILE */
+/* PLAY PERSONAL AUDIO */
 /* ========================= */
 
-function playAudioFile(file) {
+function playPersonalAudio(category) {
 
-  return new Promise(resolve => {
+  /*
+    If a response somehow does not have
+    a valid assigned category,
+    use one of the 4 random recordings.
+  */
 
-    if (!file) {
-
-      resolve();
-
-      return;
-
-    }
-
-
-    /* Stop previous Magic Ball audio */
-
-    if (currentMagicAudio) {
-
-      currentMagicAudio.pause();
-
-      currentMagicAudio.currentTime = 0;
-
-    }
+  let audioCategory =
+    category;
 
 
-    const audio =
-      new Audio(file);
+  if (
+    !audioCategory ||
+    !audioResponses[audioCategory] ||
+    audioResponses[audioCategory].length === 0
+  ) {
 
+    audioCategory =
+      "random";
 
-    currentMagicAudio =
-      audio;
+  }
 
-
-    audio.volume = 1;
-
-
-    audio.addEventListener(
-      "ended",
-      () => {
-
-        resolve();
-
-      },
-      {
-        once: true
-      }
-    );
-
-
-    audio.addEventListener(
-      "error",
-      () => {
-
-        console.log(
-          "Could not load audio:",
-          file
-        );
-
-        resolve();
-
-      },
-      {
-        once: true
-      }
-    );
-
-
-    audio
-      .play()
-      .catch(error => {
-
-        console.log(
-          "Audio could not play:",
-          error
-        );
-
-        resolve();
-
-      });
-
-  });
-
-}
-
-
-/* ========================= */
-/* PLAY ANSWER VOICE */
-/* ========================= */
-
-async function playAnswerAudio(type) {
 
   const sounds =
-    audioResponses[type];
+    audioResponses[audioCategory];
 
 
   if (
@@ -1942,131 +1842,89 @@ async function playAnswerAudio(type) {
   }
 
 
+  /*
+    Pick ONE recording.
+
+    Nothing plays after it.
+  */
+
   const randomSound =
-    getRandomItem(sounds);
+    getRandomItem(
+      sounds
+    );
 
 
-  await playAudioFile(
-    randomSound
-  );
+  /*
+    Stop previous Magic Ball audio
+    if she shakes it again quickly.
+  */
 
-}
+  if (currentMagicAudio) {
 
+    currentMagicAudio.pause();
 
-/* ========================= */
-/* PLAY RANDOM PHRASE VOICE */
-/* ========================= */
-
-async function playRandomPhraseAudio(
-  randomPhrase
-) {
-
-  if (
-    !randomPhrase ||
-    !randomPhrase.audio
-  ) {
-
-    return;
+    currentMagicAudio.currentTime =
+      0;
 
   }
 
 
-  await playAudioFile(
-    randomPhrase.audio
-  );
-
-}
-
-
-/* ========================= */
-/* FACE TALKING ANIMATION */
-/* ========================= */
-
-function startMagicFaceTalking() {
-
-  if (!ballFace) return;
-
-
-  ballFace.classList.add(
-    "magic-face-talking"
-  );
-
-}
-
-
-function stopMagicFaceTalking() {
-
-  if (!ballFace) return;
-
-
-  ballFace.classList.remove(
-    "magic-face-talking"
-  );
-
-}
-
-
-/* ========================= */
-/* PLAY FULL VOICE RESPONSE */
-/* ========================= */
-
-/*
-  Example:
-
-  Magic Ball generates:
-
-  "The universe says yes."
-
-  It will:
-
-  1. Play yes1/yes2/yes3
-  2. Wait for it to finish
-  3. Play phrase1/phrase2/etc.
-*/
-
-async function playMagicVoice(
-  answer,
-  randomPhrase
-) {
-
-  startMagicFaceTalking();
-
-
-  /*
-    First play the audio matching
-    YES / NO / MAYBE / SPECIAL answer.
-  */
-
-  await playAnswerAudio(
-    answer.type
-  );
-
-
-  /*
-    Small pause between recordings.
-  */
-
-  await new Promise(resolve => {
-
-    setTimeout(
-      resolve,
-      250
+  currentMagicAudio =
+    new Audio(
+      randomSound
     );
 
-  });
+
+  currentMagicAudio.volume =
+    1;
 
 
   /*
-    Then play the matching random
-    phrase recording.
+    Make your face animate
+    while your recording plays.
   */
 
-  await playRandomPhraseAudio(
-    randomPhrase
+  ballFace?.classList.add(
+    "magic-face-talking"
   );
 
 
-  stopMagicFaceTalking();
+  currentMagicAudio
+    .play()
+    .catch(error => {
+
+      console.log(
+        "Magic Ball audio could not play:",
+        error
+      );
+
+
+      ballFace?.classList.remove(
+        "magic-face-talking"
+      );
+
+    });
+
+
+  /*
+    Stop talking animation
+    once the recording ends.
+  */
+
+  currentMagicAudio
+    .addEventListener(
+      "ended",
+      () => {
+
+        ballFace?.classList.remove(
+          "magic-face-talking"
+        );
+
+      },
+      {
+        once: true
+      }
+    );
 
 }
 
@@ -2088,10 +1946,14 @@ function shakeMagicBall() {
 
 
   const question =
-    magicQuestion.value.trim();
+    magicQuestion
+      .value
+      .trim();
 
 
-  /* REQUIRE QUESTION */
+  /* ========================= */
+  /* REQUIRE A QUESTION */
+  /* ========================= */
 
   if (!question) {
 
@@ -2120,7 +1982,9 @@ function shakeMagicBall() {
   }
 
 
-  /* DISABLE BUTTON */
+  /* ========================= */
+  /* DISABLE SHAKE BUTTON */
+  /* ========================= */
 
   if (shakeBall) {
 
@@ -2134,13 +1998,17 @@ function shakeMagicBall() {
   }
 
 
+  /* ========================= */
   /* THINKING MESSAGE */
+  /* ========================= */
 
   magicAnswer.textContent =
     "consulting the universe... 🔮";
 
 
-  /* RESET SHAKE */
+  /* ========================= */
+  /* RESET SHAKE ANIMATION */
+  /* ========================= */
 
   magicBall?.classList.remove(
     "ball-shake"
@@ -2159,7 +2027,9 @@ function shakeMagicBall() {
   }
 
 
-  /* SPIN FACE */
+  /* ========================= */
+  /* SPIN YOUR FACE */
+  /* ========================= */
 
   if (ballFace) {
 
@@ -2178,13 +2048,17 @@ function shakeMagicBall() {
   }
 
 
+  /* ========================= */
   /* DRAMATIC PAUSE */
+  /* ========================= */
 
   setTimeout(
     () => {
 
 
-      /* CHECK FOR SPECIAL ANSWER */
+      /* ========================= */
+      /* CHECK SPECIAL QUESTIONS */
+      /* ========================= */
 
       const specialAnswer =
         getSpecialAnswer(
@@ -2192,41 +2066,26 @@ function shakeMagicBall() {
         );
 
 
-      /*
-        Otherwise use one of the
-        normal yes / no / maybe answers.
-      */
+      /* ========================= */
+      /* OTHERWISE RANDOM RESPONSE */
+      /* ========================= */
 
       const answer =
         specialAnswer ||
         getRandomResponse();
 
 
-      /*
-        Pick ONE of your four
-        random ending phrases.
-      */
-
-      const randomPhrase =
-        getRandomItem(
-          randomPhrases
-        );
-
-
-      /*
-        Put BOTH pieces together
-        on screen.
-      */
-
-      const fullAnswer =
-        `${answer.text} ${randomPhrase.text}`;
-
+      /* ========================= */
+      /* DISPLAY ANSWER */
+      /* ========================= */
 
       magicAnswer.textContent =
-        fullAnswer;
+        answer.text;
 
 
+      /* ========================= */
       /* ANSWER ANIMATION */
+      /* ========================= */
 
       magicAnswer.classList.remove(
         "answer-show"
@@ -2241,9 +2100,31 @@ function shakeMagicBall() {
       );
 
 
+      /* ========================= */
+      /* PLAY MATCHING VOICE */
+      /* ========================= */
+
       /*
-        Stop spin animation.
+        yes    -> yes1/2/3
+        no     -> no1/2/3
+        maybe  -> maybe1/2/3
+
+        random -> phrase1/2/3/4
+
+        nap    -> nap.mp3
+        love   -> love.mp3
+        water  -> water.mp3
+        treat  -> treat.mp3
       */
+
+      playPersonalAudio(
+        answer.type
+      );
+
+
+      /* ========================= */
+      /* STOP FACE SPIN */
+      /* ========================= */
 
       if (ballFace) {
 
@@ -2254,18 +2135,9 @@ function shakeMagicBall() {
       }
 
 
-      /*
-        Play the matching answer recording
-        AND the matching random phrase recording.
-      */
-
-      playMagicVoice(
-        answer,
-        randomPhrase
-      );
-
-
+      /* ========================= */
       /* RE-ENABLE BUTTON */
+      /* ========================= */
 
       if (shakeBall) {
 
@@ -2299,7 +2171,7 @@ shakeBall?.addEventListener(
 );
 
 
-/* CLICK THE BALL */
+/* CLICK THE MAGIC BALL */
 
 magicBall?.addEventListener(
   "click",
@@ -2307,7 +2179,9 @@ magicBall?.addEventListener(
 );
 
 
-/* KEYBOARD ON MAGIC BALL */
+/* ========================= */
+/* MAGIC BALL KEYBOARD ACCESS */
+/* ========================= */
 
 magicBall?.addEventListener(
   "keydown",
@@ -2328,7 +2202,9 @@ magicBall?.addEventListener(
 );
 
 
-/* ENTER IN QUESTION BOX */
+/* ========================= */
+/* PRESS ENTER IN QUESTION */
+/* ========================= */
 
 magicQuestion?.addEventListener(
   "keydown",
