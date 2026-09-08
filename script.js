@@ -25,7 +25,7 @@ const tabSounds = {
 
   study: "Audio/writing.mp3",
 
-  thoughts: "Audio/hmmmmm.mp3",
+  thoughts: "Audio/thinking.mp3",
 
   future: "Audio/shimmer.mp3",
 
