@@ -1573,3 +1573,142 @@ exampleQuestions.forEach(button => {
   );
 
 });
+
+/* ========================= */
+/* PASSWORD PROTECTION */
+/* ========================= */
+
+const correctPassword =
+  "POMPOMPURRIN";
+
+const lockScreen =
+  document.getElementById("lockScreen");
+
+const passwordInput =
+  document.getElementById("passwordInput");
+
+const unlockButton =
+  document.getElementById("unlockButton");
+
+const passwordMessage =
+  document.getElementById("passwordMessage");
+
+const lockCard =
+  document.querySelector(".lock-card");
+
+
+function unlockWebsite() {
+
+  const enteredPassword =
+    passwordInput.value.trim();
+
+
+  if (enteredPassword === correctPassword) {
+
+    passwordMessage.textContent =
+      "access granted, bestie 💚✨";
+
+
+    passwordMessage.style.color =
+      "#4f7a59";
+
+
+    /*
+      Remember access during this browser session
+    */
+
+    sessionStorage.setItem(
+      "addieWorldUnlocked",
+      "true"
+    );
+
+
+    setTimeout(() => {
+
+      lockScreen.classList.add(
+        "unlocked"
+      );
+
+    }, 700);
+
+  }
+
+  else {
+
+    passwordMessage.textContent =
+      "hmm... the bestie council says no 👀";
+
+
+    passwordMessage.style.color =
+      "#a85f5f";
+
+
+    lockCard.classList.remove(
+      "shake-error"
+    );
+
+
+    void lockCard.offsetWidth;
+
+
+    lockCard.classList.add(
+      "shake-error"
+    );
+
+
+    passwordInput.value = "";
+
+
+    passwordInput.focus();
+
+  }
+
+}
+
+
+/* UNLOCK BUTTON */
+
+unlockButton?.addEventListener(
+  "click",
+  unlockWebsite
+);
+
+
+/* PRESS ENTER */
+
+passwordInput?.addEventListener(
+  "keydown",
+  event => {
+
+    if (event.key === "Enter") {
+
+      unlockWebsite();
+
+    }
+
+  }
+);
+
+
+/* CHECK IF ALREADY UNLOCKED */
+
+window.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    const isUnlocked =
+      sessionStorage.getItem(
+        "addieWorldUnlocked"
+      );
+
+
+    if (isUnlocked === "true") {
+
+      lockScreen.classList.add(
+        "unlocked"
+      );
+
+    }
+
+  }
+);
