@@ -15,33 +15,25 @@
 
 const tabSounds = {
 
-  home: "Audio/Tabs/home.mp3",
+  home: "Audio/sparkle.mp3",
 
   favorites: "Audio/whoosh.mp3",
 
-  about: "Audio/Tabs/about.mp3",
+  about: "Audio/softbell.mp3",
 
-  memory: "Audio/Tabs/memories.mp3",
+  memory: "Audio/camerashutter.mp3",
 
-  study: "Audio/Tabs/study.mp3",
+  study: "Audio/writing.mp3",
 
-  thoughts: "Audio/Tabs/thoughts.mp3",
+  thoughts: "Audio/hmmmmm.mp3",
 
-  future: "Audio/Tabs/future.mp3",
+  future: "Audio/shimmer.mp3",
 
-  cats: "Audio/Tabs/cats.mp3",
+  cats: "Audio/meow.mp3",
 
-  /*
-    Keep your existing Awards celebration sound
-  */
   awards: "Audio/awardscelebrate.mp3",
 
-  /*
-    Your old Contact tab is now
-    the Magic Bestie 8 Ball.
-    Keep data-tab="contact" in the HTML.
-  */
-  contact: "Audio/Tabs/magicball.mp3"
+  contact: "Audio/dreamchime.mp3"
 
 };
 
